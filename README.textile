@@ -13,10 +13,10 @@ h2. Basic Idea
 
 The basic idea is to include the most commontly used element in a module:
 
-* [[Clases]]
-* [[Config]]
+* Clases
+* Config
 
-h3. [[More Info]]
+h3. More Info
 
 See the wiki for more detail.
 
