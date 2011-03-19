@@ -15,7 +15,7 @@ return array(
 			'name' => 'Module Name',
 
 			// A short description of this module, shown on the index page
-			'description' => 'This is my own custom module.',
+			'description' => 'Documentation for Modulename Module.',
 			
 			// Copyright message, shown in the footer for this module
 			'copyright' => '&copy; 2012 Myself Team',

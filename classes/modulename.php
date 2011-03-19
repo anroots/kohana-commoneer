@@ -1,6 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Use this if you like your module to extend the Kohana Core
+ * Modulename
+ *
+ * @package    Modulename
+ * @category   Base
+ * @author     Myself Team
+ * @copyright  (c) 2012 Myself Team
+ * @license    http://kohanaphp.com/license.html
  */
 class Modulename extends Kohana_Modulename {}
