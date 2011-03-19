@@ -5,17 +5,14 @@ This is a base template intended to help you create your own Kohana 3 Module.
 
 The intention is not to provide with a *fix structure* of how a module should be, but to provide an start point for your our custom modules.
 
-Using Modulename
-----------------
+How to use this module
+----------------------
 
 To use this **Kohana Module Template**, just:
 
 1. Download and extract the code from [Github](https://github.com/sebicas/kohana-module-template).
 2. Place the module into your Kohana instances modules folder.
-3. Finally enable the module within the application bootstrap within the section entitled _modules_.
-
-How to use this module
-----------------------
+3. Enable the module within the application bootstrap within the section entitled `modules`.
 
 Go to `application/bootstrap.php`, look for `Kohana::modules()` and add:
 
