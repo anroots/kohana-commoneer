@@ -61,8 +61,15 @@ See it working
 --------------
 
 To the module working go to:
-
 [http://www.yoursite.com/modulename](http://www.yoursite.com/modulename)
+
+How to Write a Module Resources
+-------------------------------
+
+Here is a list of articles I found about how to write your own Modules in Kohana 3
+
+* [Writing a module for Kohana3](http://query7.com/writing-a-module-for-kohana3)
+* [Kohana PHP 3.0 (KO3) Tutorial Part 8](http://www.dealtaker.com/blog/2010/04/30/kohana-php-3-0-ko3-tutorial-part-8/)
 
 Contributing
 ------------
