@@ -10,17 +10,20 @@
  */
 class Kohana_Modulename {
 
+    // Config data
+    protected $_config;
+
     /**
      * Class Main Constructor Method
      * This method is executed every time your module class is instantiated.
      */
     public function __construct() {
 
-        // Load module configuration
-        $some_config_value = Kohana::config('modulename.some_config_value');
+        // Loading module configuration file data
+        $this->_config = Kohana::config('modulename');
 
-        // Say hi!
-        echo 'Hello Modulename! '.$some_config_value;
+        // Say hi! usign date entered in the config file
+        echo 'Hello Modulename! '.$this->_config['some_config_value'];
 
     }
 
