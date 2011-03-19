@@ -33,17 +33,18 @@ To use this Kohana Module Template, just:
 How to use this module
 ----------------------
 
+<<<<<<< HEAD
+Go to `application/bootstrap.php`, look for `Kohana::modules()` and add:
+=======
 Go to bootstrap.php and look for `Kohana::modules()` and add:
+>>>>>>> origin/master
 
-<pre>
   'modulename' => MODPATH.'kohana-module-template', // Module Name & Path can be diferent if you like
-</pre>
 
 Example:
 
 Replace 'modulename' and 'kohana-module-template' for your own name & path respectably.
 
-<pre>
   Kohana::modules(array(
         // 'auth'       => MODPATH.'auth',       // Basic authentication
         // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
@@ -55,3 +56,13 @@ Replace 'modulename' and 'kohana-module-template' for your own name & path respe
         // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
         'modulename'  => MODPATH.'kohana-module-template',  // Add Module Name & Path
         ));
+
+Contributing
+------------
+
+1. Fork it.
+2. Create a branch (`git checkout -b my_markup`)
+3. Commit your changes (`git commit -am "Added Snarkdown"`)
+4. Push to the branch (`git push origin my_markup`)
+5. Create an [Issue][1] with a link to your branch
+6. Enjoy a refreshing orange juice and wait
