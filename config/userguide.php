@@ -1,5 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Module Userguide Documentation Data
+ */
 return array(
 
 	// Leave this alone
