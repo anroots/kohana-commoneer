@@ -32,6 +32,7 @@ Go to bootstrap.php and look for Kohana::modules() array and add:
 
 Example:
 
+<?
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
