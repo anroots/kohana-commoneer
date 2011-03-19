@@ -7,6 +7,13 @@ The intention is not to provide with a fix structure of how a module should be, 
 
 *Fell free to Fork and make your own changes.*
 
+Colaborators
+------------
+
+Thanks to the following colaborators:
+
+* [sebicas](http://www.sebicas.com) -- `Sebastian Castro`
+
 Planned support
 ---------------
 
@@ -14,8 +21,8 @@ In the near future, additional support for the following methods will be include
 
 1. Drivers
 
-Using Cache
------------
+Using Modulename
+----------------
 
 To use this Kohana Module Template, just:
 
