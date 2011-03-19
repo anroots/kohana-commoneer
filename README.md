@@ -29,22 +29,23 @@ Quick example
 The following is a quick example of how to use a normal Module.
 
 	<?php
-	// Get a Sqlite Cache instance
-	$mycache = Cache::instance('sqlite');
 
-	// Create some data
-	$data = array('foo' => 'bar', 'apples' => 'pear', 'BDFL' => 'Shadowhand');
+        // In bootstrap.php look for:
 
-	// Save the data to cache, with an id of test_id and a lifetime of 10 minutes
-	$mycache->set('test_id', $data, 600);
-
-	// Retrieve the data from cache
-	$retrieved_data = $mycache->get('test_id');
-
-	// Remove the cache item
-	$mycache->delete('test_id');
-
-	// Clear the cache of all stored items
-	$mycache->delete_all();
+        /**
+         * Enable modules. Modules are referenced by a relative or absolute path.
+         */
+        Kohana::modules(array(
+                // 'auth'       => MODPATH.'auth',       // Basic authentication
+                // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+                // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+                // 'database'   => MODPATH.'database',   // Database access
+                // 'image'      => MODPATH.'image',      // Image manipulation
+                // 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+                // 'unittest'   => MODPATH.'unittest',   // Unit testing
+                'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+                'mongodb'  => MODPATH.'mongodb',  // User guide and API documentation
+                *'modulename'  => MODPATH.'kohana-module-template',  // Module Name & Path can be diferent if you like*
+                ));
 
 The example is using the SQLite driver.
