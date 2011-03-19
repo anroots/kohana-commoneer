@@ -19,7 +19,7 @@ Planned support
 
 In the near future, additional support for the following methods will be included.
 
-1. Drivers
+* **Jelly-style driver configuration**
 
 Using Modulename
 ----------------
