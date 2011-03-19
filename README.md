@@ -5,22 +5,6 @@ This is a base template intended to help you create your own Kohana 3 Module.
 
 The intention is not to provide with a *fix structure* of how a module should be, but to provide an start point for your our custom modules.
 
-**Fell free to Fork and make your own changes.**
-
-Colaborators
-------------
-
-Thanks to the following colaborators:
-
-* [sebicas](https://github.com/sebicas)
-
-Planned support
----------------
-
-In the near future, additional support for the following methods will be included.
-
-* **Jelly-style driver configuration**
-
 Using Modulename
 ----------------
 
@@ -80,3 +64,17 @@ Contributing
 4. Push to the branch (`git push origin my_markup`)
 5. Create an [Issue][1] with a link to your branch
 6. Enjoy a refreshing orange juice and wait
+
+Colaborators
+------------
+
+Thanks to the following colaborators:
+
+* [sebicas](https://github.com/sebicas)
+
+Future Planned support
+----------------------
+
+In the near future, additional support for the following methods will be included.
+
+* **Jelly-style driver configuration**
