@@ -33,11 +33,7 @@ To use this Kohana Module Template, just:
 How to use this module
 ----------------------
 
-<<<<<<< HEAD
 Go to `application/bootstrap.php`, look for `Kohana::modules()` and add:
-=======
-Go to bootstrap.php and look for `Kohana::modules()` and add:
->>>>>>> origin/master
 
   'modulename' => MODPATH.'kohana-module-template', // Module Name & Path can be diferent if you like
 
