@@ -12,7 +12,7 @@ Colaborators
 
 Thanks to the following colaborators:
 
-* [sebicas](http://www.sebicas.com) -- `Sebastian Castro`
+* [sebicas](http://www.sebicas.com) - Sebastian Castro
 
 Planned support
 ---------------
@@ -33,7 +33,7 @@ To use this Kohana Module Template, just:
 How to use this module
 ----------------------
 
-Go to bootstrap.php and look for Kohana::modules() array and add:
+Go to bootstrap.php and look for `Kohana::modules()` and add:
 
 <pre>
   'modulename' => MODPATH.'kohana-module-template', // Module Name & Path can be diferent if you like
