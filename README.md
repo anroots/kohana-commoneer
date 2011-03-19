@@ -46,5 +46,5 @@ Replace 'modulename' and 'kohana-module-template' for your own name & path respe
         // 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
         // 'unittest'   => MODPATH.'unittest',   // Unit testing
         // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-        'modulename'  => MODPATH.'kohana-module-template',  // <-- Add Module Name & Path
+        'modulename'  => MODPATH.'kohana-module-template',  // Add Module Name & Path
         ));
