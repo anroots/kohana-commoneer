@@ -23,29 +23,28 @@ To use this Kohana Module Template, just:
 2. Place the module into your Kohana instances modules folder.
 3. Finally enable the module within the application bootstrap within the section entitled _modules_.
 
-Quick example
--------------
+How to use this module
+----------------------
 
-The following is a quick example of how to use a normal Module.
+Go to bootstrap.php and look for Kohana::modules() array and add:
 
-	<?php
+'modulename' => MODPATH.'kohana-module-template',  // Module Name & Path can be diferent if you like
 
-        // In bootstrap.php look for:
+Example:
 
-        /**
-         * Enable modules. Modules are referenced by a relative or absolute path.
-         */
-        Kohana::modules(array(
-                // 'auth'       => MODPATH.'auth',       // Basic authentication
-                // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-                // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-                // 'database'   => MODPATH.'database',   // Database access
-                // 'image'      => MODPATH.'image',      // Image manipulation
-                // 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-                // 'unittest'   => MODPATH.'unittest',   // Unit testing
-                'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-                'mongodb'  => MODPATH.'mongodb',  // User guide and API documentation
-                *'modulename'  => MODPATH.'kohana-module-template',  // Module Name & Path can be diferent if you like*
-                ));
+/**
+ * Enable modules. Modules are referenced by a relative or absolute path.
+ */
+Kohana::modules(array(
+        // 'auth'       => MODPATH.'auth',       // Basic authentication
+        // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+        // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+        'database'   => MODPATH.'database',   // Database access
+        // 'image'      => MODPATH.'image',      // Image manipulation
+        'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+        // 'unittest'   => MODPATH.'unittest',   // Unit testing
+        'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+This -> 'modulename'  => MODPATH.'kohana-module-template',  // Module Name & Path can be diferent if you like
+        ));
 
-The example is using the SQLite driver.
+Replace 'modulename' and 'kohana-module-template' for your own name & path respectably.
