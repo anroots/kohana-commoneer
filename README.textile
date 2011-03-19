@@ -14,9 +14,12 @@ h2. Basic Idea
 The basic idea is to include the most commontly used element in a module:
 
 * Clases
+
    - Controler
    - Models
+
 * Config
+* Guide
 
 h3. More Info
 
