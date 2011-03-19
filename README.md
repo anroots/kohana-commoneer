@@ -34,6 +34,8 @@ Go to bootstrap.php and look for Kohana::modules() array and add:
 
 Example:
 
+Replace 'modulename' and 'kohana-module-template' for your own name & path respectably.
+
 <pre>
   Kohana::modules(array(
         // 'auth'       => MODPATH.'auth',       // Basic authentication
@@ -46,6 +48,3 @@ Example:
         // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
         'modulename'  => MODPATH.'kohana-module-template',  // <-- Add Module Name & Path
         ));
-</pre>
-
-Replace 'modulename' and 'kohana-module-template' for your own name & path respectably.
