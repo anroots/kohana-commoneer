@@ -28,14 +28,12 @@ How to use this module
 
 Go to bootstrap.php and look for Kohana::modules() array and add:
 
+<?
 'modulename' => MODPATH.'kohana-module-template',  // Module Name & Path can be diferent if you like
 
 Example:
 
 <?
-/**
- * Enable modules. Modules are referenced by a relative or absolute path.
- */
 Kohana::modules(array(
         // 'auth'       => MODPATH.'auth',       // Basic authentication
         // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
