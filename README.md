@@ -1,9 +1,11 @@
 Kohana Module Template
 ======================
 
-This is a base template intended to help you create your own Kohana 3 Module. The intention is not to provide with a fix structure of how a module should be but to provide an start point for your our custom modules.
-Fell free to Fork and make your own changes.
+This is a base template intended to help you create your own Kohana 3 Module.
 
+The intention is not to provide with a fix structure of how a module should be, but to provide an start point for your our custom modules.
+
+*Fell free to Fork and make your own changes.*
 
 Planned support
 ---------------
