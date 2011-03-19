@@ -227,9 +227,3 @@ will display as:
 Headers are automatically assigned an id, based on the content of the header, so each header can be linked to. You can manually assign a different id using the syntax as defined in Markdown Extra. If multiple headers have the same content (e.g. more than one "Examples" header), only the first will get be automatically assigned an id, so you should manually assign more descriptive ids. For example:
 
 	### Examples     {#more-descriptive-id}
-
-## Including Views
-
-If you need you may include a regular Kohana View file by placing the name of the view in double curly brackets.  **If the view is not found, no error or exception will be shown, the curly brackets and view name will simply remain there!**
-
-	{{some/view/file}}
