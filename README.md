@@ -35,12 +35,15 @@ How to use this module
 
 Go to `application/bootstrap.php`, look for `Kohana::modules()` and add:
 
+<pre>
   'modulename' => MODPATH.'kohana-module-template', // Module Name & Path can be diferent if you like
+</pre>
 
 Example:
 
 Replace 'modulename' and 'kohana-module-template' for your own name & path respectably.
 
+<pre>
   Kohana::modules(array(
         // 'auth'       => MODPATH.'auth',       // Basic authentication
         // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
@@ -52,6 +55,7 @@ Replace 'modulename' and 'kohana-module-template' for your own name & path respe
         // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
         'modulename'  => MODPATH.'kohana-module-template',  // Add Module Name & Path
         ));
+</pre>
 
 Contributing
 ------------
