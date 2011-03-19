@@ -5,7 +5,7 @@ class Controller_Modulename extends Controller {
 	public function action_index()
 	{
                 // Say hi!
-		$this->response->body('hello, module!');
+                $this->response->body('hello, module!');
 	}
 
 } // End Welcome
