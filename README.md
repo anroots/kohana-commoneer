@@ -57,6 +57,13 @@ Replace 'modulename' and 'kohana-module-template' for your own name & path respe
         ));
 </pre>
 
+See it working
+--------------
+
+To the module working go to:
+
+[http://www.yoursite.com/modulename](http://www.yoursite.com/modulename)
+
 Contributing
 ------------
 
