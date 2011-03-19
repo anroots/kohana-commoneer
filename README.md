@@ -12,7 +12,7 @@ Colaborators
 
 Thanks to the following colaborators:
 
-* [sebicas](http://www.sebicas.com) - Sebastian Castro
+* [sebicas](https://github.com/sebicas)
 
 Planned support
 ---------------
