@@ -24,7 +24,7 @@ In the near future, additional support for the following methods will be include
 Using Modulename
 ----------------
 
-To use this Kohana Module Template, just:
+To use this **Kohana Module Template**, just:
 
 1. Download and extract the code from [Github](https://github.com/sebicas/kohana-module-template).
 2. Place the module into your Kohana instances modules folder.
