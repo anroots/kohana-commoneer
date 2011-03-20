@@ -39,6 +39,9 @@ class Kohana_Modulename {
         // Echo Some Text
         echo ' & here is the static method! '.$text;
 
+        // Show Documentation Link
+        echo " - See your <a href='/guide/modulename'>Module Documentation</a>";
+
     }
 
 }
