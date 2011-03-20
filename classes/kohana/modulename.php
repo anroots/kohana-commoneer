@@ -10,7 +10,9 @@
  */
 class Kohana_Modulename {
 
-    // Config data
+    /**
+    * @var array configuration settings
+    */
     protected $_config = array();
 
     /**
@@ -28,7 +30,7 @@ class Kohana_Modulename {
     }
 
     /**
-     * Output the given Text
+     * This method echos the given Text
      *
      * @param   string   Text to show
      */
