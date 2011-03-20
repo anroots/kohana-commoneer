@@ -8,6 +8,9 @@
 // Define some Module constant
 define('MOD_CONSTANT', 'I am constanting improving...');
 
+// Enabling the Userguide module from my Module
+Kohana::modules(Kohana::modules() + array('userguide' => MODPATH.'userguide'));
+
 /*
  * Define Module Specific Routes
  */
