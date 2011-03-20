@@ -3,13 +3,11 @@ Kohana Module Template
 
 This is a base template intended to help you create your own Kohana 3 Module.
 
-Is important to understand that most modules won't need models, controlers, views, etc... since this is a Module Template to learn about what you can do with Kohana.
-
-I think that for newbies It's easier to delete what you don't need that to write from scratch what you need... so feel free to play, delete, add anything you want.
-
-**Important**: You could delete everything and only keep one file is that is what you need.
+Is important to understand that most modules won't need models, controlers, views, etc... since this is a Module Template to learn about what you can do with Kohana. I think that for newbies It's easier to delete what you don't need that to write from scratch what you need... so feel free to play, delete, add anything you want.
 
 The intention is not to provide with a *fix structure* of how a module should be, but to provide an start point for your our custom modules.
+
+**Important**: You could delete everything and only keep one file is that is what you need.
 
 How to use this module
 ----------------------
