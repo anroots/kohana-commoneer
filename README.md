@@ -41,8 +41,7 @@ Replace 'modulename' and 'kohana-module-template' for your own name & path respe
 See it working
 --------------
 
-To the module working go to:
-[http://www.yoursite.com/modulename](http://www.yoursite.com/modulename)
+To see a **Demo** of the Module working go to [http://kohana.sebicas.com/modulename](http://kohana.sebicas.com/modulename)
 
 How to Write a Module Resources
 -------------------------------
