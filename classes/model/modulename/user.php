@@ -5,7 +5,7 @@
  * so the module can be functional just by copying the module folder.
  *
  * It's recomended to name you Module's Models as Model_Modulename_<Model>
- * to avoid any conflics with any application model
+ * to avoid any conflics with any application models
  */
 class Model_Modulename_User extends Model_Modulename {
 
