@@ -11,7 +11,7 @@
 class Kohana_Modulename {
 
     // Config data
-    protected $_config;
+    protected $_config = array();
 
     /**
      * Class Main Constructor Method
@@ -20,7 +20,7 @@ class Kohana_Modulename {
     public function __construct() {
 
         // Loading module configuration file data
-        $this->_config = Kohana::config('modulename');
+        $this->_config = Kohana::config('modulename')->as_array();
 
         // Say hi! usign date entered in the config file
         echo 'Hello Modulename! '.$this->_config['some_config_value'];
