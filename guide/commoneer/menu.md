@@ -1,2 +1,2 @@
 ## [Commoneer]()
-- [Configuration](config)
+- [Assets](assets)
