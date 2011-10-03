@@ -45,7 +45,7 @@ return array(
 
         ),
         'js' => array(
-            'hoverintent' => 'shared/js/libs/hoverintent-v6.min'
+            'hoverintent' => 'shared/js/libs/hoverintent-v6.min',
         ),
         'less' => array(
 
