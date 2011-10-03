@@ -1,9 +1,20 @@
 Commoneer
 =========
 
-...is a Kohana module that extends the default helpers, providing additional functionality.
+Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
 
-Commoneer adds functions I often find myself using such as formatting a date for MYSQL.
+The module extends several Kohana's built-in helpers, providing additional functions and behaviours.
+
+Included Classes
+----------------
+
+**Assets** - Dynamic inclusion of stylesheets and scripts on as-needed basis
+
+Extended Helpers
+----------------
+* Date
+* Input
+* Security
 
 Install
 =======
@@ -13,4 +24,4 @@ Copy to Kohana's modules folder and rename to commoneer. Add a line to applicati
 Documentation
 =============
 
-None so far. The functions are commented with PhpDoc tough.
+Minimal Kohana Userguide documentation is provided as well as Phpdoc style comments.
