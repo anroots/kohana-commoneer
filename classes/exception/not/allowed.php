@@ -3,13 +3,13 @@
  * @package Commoneer
  * @subpackage Exception
  */
-class Exception_Not_Implemented extends Commoneer_Exception
+class Exception_Not_Allowed extends Commoneer_Exception
 {
 
     /**
      * @var int Not Implemented Error Code
      */
-    protected $_code = 501;
+    protected $_code = 405;
 
     /**
      * Construct a new Not Implemented Error
@@ -17,11 +17,10 @@ class Exception_Not_Implemented extends Commoneer_Exception
      * @param array $variables
      * @param int $code
      */
-    public function __construct($message = 'Function \':name\' is not yet implemented!', array $variables = array(), $code = 501)
+    public function __construct($message = 'Method \':name\' called with invalid parameters!', array $variables = array(), $code = 501)
     {
         $variables[':name'] = $this->get_calling_function_name();
         parent::__construct($message, $variables, $code);
     }
 
-  
 }

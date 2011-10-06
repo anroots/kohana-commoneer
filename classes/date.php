@@ -47,7 +47,7 @@ class Date extends Kohana_Date
 
         if (strpos($date, '-')) {
             if ($include_time) {
-                return date('d.m.Y H:m', strtotime($date));
+                return date('d.m.Y H:i', strtotime($date));
             }
             return date('d.m.Y', strtotime($date));
         }

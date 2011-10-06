@@ -19,6 +19,7 @@ class Security extends Kohana_Security
     {
 
         if (!empty($input)) {
+            $input = iconv("utf-8", "ascii//TRANSLIT", $input);
             $input = strtolower(preg_replace('/[^a-zA-Z0-9-._]/', '', $input));
         }
         $input = str_replace(' ', '', $input);
