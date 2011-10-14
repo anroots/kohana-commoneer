@@ -22,7 +22,7 @@ class Date extends Kohana_Date
             return NULL;
         }
         if (!strtotime($date) && $date > 1) {
-            $date = date('Y-m-d H:i:s', $date);
+            $date = date('Y-m-d H:i:s', (int)$date);
         }
 
         if ($include_time) {
@@ -45,6 +45,7 @@ class Date extends Kohana_Date
             return NULL;
         }
 
+
         if (strpos($date, '-')) {
             if ($include_time) {
                 return date('d.m.Y H:i', strtotime($date));
@@ -66,4 +67,22 @@ class Date extends Kohana_Date
         return strtotime($start) < strtotime($end);
     }
 
+
+    /**
+     * Check if the input date is realistic
+     * Used for checking for format errors where PHP usually uses the 0 date (1970)
+     * @static
+     * @param string $date Any valid date string
+     * @return bool TRUE if we're reasonably sure the date is OK
+     */
+    public static function realistic_date($date)
+    {
+        $date = strtotime($date);
+
+        // If year is smaller than 1990, it's probably invalid
+        if ($date < 631152000) {
+            return FALSE;
+        }
+        return TRUE;
+    }
 }
