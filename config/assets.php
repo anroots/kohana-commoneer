@@ -28,8 +28,8 @@ return array(
             'assets/shared/css/',
         ),
         'js' => array(
-            'assets/css/',
-            'assets/shared/css/',
+            'assets/js/', // Project specific
+            'assets/shared/js/', // Shared is symlink to resource repository
         ),
         'less' => array(
             'assets/less/',

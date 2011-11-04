@@ -50,6 +50,9 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
     protected function __construct()
     {
         $this->_config = Kohana::$config->load('assets');
+        if (Assets::$_instance === NULL) {
+            Assets::$_instance = $this;
+        }
     }
 
 

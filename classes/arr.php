@@ -13,28 +13,26 @@ class Arr extends Kohana_Arr
      * @param bool $autofill If TRUE, creates and fills the missing keys with NULL values instead
      * @return bool Returns TRUE if all keys in $expected are present in $input
      */
-    public static function check_keys(array &$input, array $expected, $autofill = FALSE)
+    public static function check_keys(array &$input, array $expected, $autofill = TRUE)
     {
-        // Return FALSE on missing keys
-        if (!$autofill) {
+
+        if (!$autofill) { // Return FALSE on missing keys
 
             if ((empty($input) && !empty($expected))) {
                 return FALSE;
             }
 
-        } else {
+        } else { // Fill with NULLs
 
             if (empty($expected)) {
                 return TRUE;
             }
-            // Fill with NULLs
             if (empty($input) && !empty($expected)) {
                 $expected = array_fill(0, count($expected), NULL);
                 return array_flip($expected);
 
             }
         }
-
 
         // Check each input array key against expected
         foreach ($expected as $expected_key) {
@@ -48,4 +46,24 @@ class Arr extends Kohana_Arr
         }
         return TRUE;
     }
+
+
+	/**
+	 * Unset all keys that have empty string values
+	 * @static
+	 * @param array $input
+	 * @return array
+	 */
+	public static function unset_empty(array $input) {
+		if (!is_array($input) || empty($input)) {
+			return array();
+		}
+
+		foreach ($input as $key => $value) {
+			if (is_string($value) && $value == '') {
+				unset($input[$key]);
+			}
+		}
+		return $input;
+	}
 }
