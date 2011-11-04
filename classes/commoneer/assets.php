@@ -129,7 +129,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
         // Add every specified file to the load que
         foreach ($names as $file) {
             $path = $this->_find_file($type, $file);
-
             if (!$path) {
                 continue;
             }
@@ -137,7 +136,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
             // Add HTML for including the asset
             switch ($type) {
                 case Assets::STYLE:
-                    $this->_assets[$type][$file] = '<link rel="stylesheet/less" type="text/css" href="' . $path . '">';
+                    $this->_assets[$type][$file] = '<link rel="stylesheet/less" type="text/css" href="' . URL::base() . $path . '">';
                     break;
                 case  Assets::SCRIPT:
                     $this->_assets[$type][$file] = HTML::script($path);
@@ -163,7 +162,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
         if (empty($this->_assets)) {
             return NULL;
         }
-
         // Render all types
         if ($type === TRUE) {
 
@@ -217,11 +215,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
         // The file isn't predefined, search for it in all predefined asset folders
         if (array_key_exists($type, $this->_config->assets_paths) && !empty($this->_config->assets_paths[$type])) {
             foreach ($this->_config->assets_paths[$type] as $path) {
-                $file = $path . $file . '.' . $type;
-                if (file_exists(DOCROOT . $file)) {
-                    return URL::base() . $this->_config->assets_url . $file;
+                $file_path = $path . $file . '.' . $type;
+                if (file_exists(DOCROOT . $file_path)) {
+                    return $this->_config->assets_url . $file_path;
                 }
             }
+
         }
 
         Kohana::$log->write(Kohana_Log::ERROR, 'Tried to load asset "' . $file . '", but got error 404.');
