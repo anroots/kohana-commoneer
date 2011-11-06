@@ -11,7 +11,7 @@
  * @category Controller
  * @author Ando Roots 2011
  */
-abstract class Commoneer_Controller_Ajax extends Controller_Template
+abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 {
 
 
