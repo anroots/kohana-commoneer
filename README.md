@@ -9,7 +9,8 @@ The module strongly reflects my developing style and might not me suitable for e
 Included Classes
 ----------------
 
-**Assets** - Dynamic inclusion of stylesheets and scripts on as-needed basis
+**Assets** - Dynamic inclusion of stylesheets and scripts on as-needed basis.
+
 No need to write if statements to your master template file when all you have to do is add
     Assets::use_script('tablesorter')
 to your controller action and the script gets included.
@@ -30,7 +31,7 @@ Copy to Kohana's modules folder and rename to commoneer. Add a line to applicati
 
 Maintenance and versioning
 ==========================
-I'm using this module as a basis in most of my projects (daily) so as soon as some new idea hits me, I'll probably add it here.
+I'm using this module as a basis in most of my projects (daily) so as soon as new idea hits me, I'll probably add them here.
 The master always holds the latest working version and previous and next versions are visible as branches.
 
 Documentation
