@@ -7,8 +7,6 @@
  *
  * @since 1.0
  * @package Commoneer
- * @subpackage Assets
- * @category Base
  * @author Ando Roots 2011
  * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -206,6 +204,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	/**
 	 * Output all the assets as HTML includes
 	 *
+	 * Clears the matching asset que when done.
 	 * @since 1.0
 	 * @param bool|string $type Render only a specific type of assets. Defaults to all
 	 * @static

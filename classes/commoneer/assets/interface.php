@@ -3,8 +3,6 @@
 /**
  * @since 1.0
  * @package Commoneer
- * @subpackage Assets
- * @category Base
  * @author Ando Roots 2011
  * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
