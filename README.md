@@ -1,4 +1,4 @@
-Commoneer
+Commoneer version 1.0
 =========
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.

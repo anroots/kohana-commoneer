@@ -4,6 +4,7 @@
  * @package Commoneer
  * @category Helpers
  * @author Ando Roots
+ * @since 1.0
  */
 class Security extends Kohana_Security
 {
@@ -11,6 +12,8 @@ class Security extends Kohana_Security
 
     /**
      * Returns a safe string for aliases/url-s/file names
+     *
+     * @since 1.0
      * @static
      * @param string $input Arbitrary string
      * @return string Cleaned input string
@@ -24,6 +27,5 @@ class Security extends Kohana_Security
         }
         $input = str_replace(' ', '', $input);
         return strtolower(trim($input));
-
     }
 }
