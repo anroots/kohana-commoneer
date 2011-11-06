@@ -1,9 +1,9 @@
-# AJAX Controller
+# The AJAX Controller
 
 Extend the `Controller_Ajax` to inherit useful resources for handling AJAX queries.
 The Ajax controller extends `Commoneer_Controller_Template`.
 
-An example controller using the Ajax functionality.
+# Example controller
 
     class Controller_Post extends Controller_Ajax
 	{
@@ -25,3 +25,15 @@ An example controller using the Ajax functionality.
 			$this->respond(parent::STATUS_OK, __('New post saved!'));
 		}
 	}
+
+# Behaviour
+
+`$this->respond()` has two formats, the main one takes a single associative array as an input and echoes the corresponding JSON output.
+There's also a shorthand: status constant (see the API documentation) as the first and a message for the 2nd parameter.
+
+The output usually includes 2 "mandatory" fields: _status_ and _response_. That behaviour can be disabled by setting `$this->_bare = TRUE;`.
+
+# Invocation Examples
+	$this->respond(parent::STATUS_ERROR, 'Something went wrong!');
+
+	$this->respond(array('status' => parent::STATUS_UNAUTHORIZED, 'action_performed' => 'post');
