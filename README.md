@@ -10,11 +10,12 @@ Included Classes
 ----------------
 
 **Assets** - Dynamic inclusion of stylesheets and scripts on as-needed basis.
-
 No need to write if statements to your master template file when all you have to do is add
     Assets::use_script('tablesorter')
 to your controller action and the script gets included.
 
+**Controller_Template** extension - Adds convention over configuration automatic view detection and convenience attributes
+**Commoneer_ORM** - Extends the ORM module, overriding the delete() and adding get()
 
 Extended Helpers
 ----------------

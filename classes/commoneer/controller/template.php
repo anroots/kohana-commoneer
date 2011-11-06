@@ -49,6 +49,13 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 */
 	public $content;
 
+
+	/**
+	 * @var string Redirect there when login is required, but user is not authenticated
+	 */
+	protected $_login_url = 'public';
+
+
 	/**
 	 * Alias to $this->template->title
 	 * @var
@@ -97,7 +104,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 
 		// Redirect if not logged in
 		if ($this->_require_login && !Auth::instance()->logged_in()) {
-			$this->request->redirect('public');
+			$this->request->redirect($this->_login_url);
 		}
 
 
