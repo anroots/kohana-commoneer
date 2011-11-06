@@ -1,4 +1,4 @@
-Commoneer version 1.1 RELEASE CANDIDATE
+Commoneer version 1.1
 =========
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
