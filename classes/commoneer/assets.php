@@ -85,11 +85,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
-	 * @return void
+	 * @return Commoneer_Assets
 	 */
 	public static function use_script($names)
 	{
 		Assets::instance()->_add_resource(Assets::SCRIPT, $names);
+		return Assets::instance();
 	}
 
 
@@ -98,11 +99,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
-	 * @return void
+	 * @return Commoneer_Assets
 	 */
 	public static function use_style($names)
 	{
 		Assets::instance()->_add_resource(Assets::STYLE, $names);
+		return Assets::instance();
 	}
 
 
@@ -111,11 +113,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
-	 * @return void
+	 * @return Commoneer_Assets
 	 */
 	public static function use_css($names)
 	{
 		Assets::instance()->_add_resource(Assets::CSS, $names);
+		return Assets::instance();
 	}
 
 
