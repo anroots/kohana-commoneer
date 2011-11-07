@@ -173,29 +173,25 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * ...and clear the include que
 	 *
 	 * @since 1.0
-	 * @param bool|string $type Render only a specific type of assets. Defaults to all
+	 * @param string $type The type of assets to render (script/style)
 	 * @return string|null HTML markup
 	 */
-	private function _render($type = TRUE)
+	private function _render($type = NULL)
 	{
 		$html = NULL;
 
-		if (empty($this->_assets)) {
+		// Auto include matching controller/action resource files
+		if ($this->_config->auto_include) {
+			$file = Request::current()->controller().DIRECTORY_SEPARATOR.Request::current()->action();
+				$this->_add_resource($type, $file);
+		}
+
+
+		if (empty($this->_assets) || !array_key_exists($type, $this->_assets)) {
 			return NULL;
 		}
-		// Render all types
-		if ($type === TRUE) {
 
-			// Implode each type
-			foreach ($this->_assets as $type => $assets) {
-				if (!empty($this->_assets[$type])) {
-					$html .= implode("\n", $assets);
-					$this->_assets[$type] = array();
-				}
-			}
-
-			// Render only a specific type
-		} elseif (!empty($this->_assets[$type])) {
+		if (!empty($this->_assets[$type])) {
 			$html = implode("\n", $this->_assets[$type]);
 			$this->_assets[$type] = array();
 		}
@@ -203,9 +199,24 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	}
 
+	/**
+	 * Render all assets at once
+	 *
+	 * @since 1.2
+	 * @return null|string
+	 */
+	private function _render_all()
+	{
+		$html = NULL;
+		foreach ($this->_assets as $type => $assets) {
+			$html .= $this->_render($type);
+		}
+		return $html;
+	}
+
 
 	/**
-	 * Output all the assets as HTML includes
+	 * Output all included assets as HTML style/script tags
 	 *
 	 * Clears the matching asset que when done.
 	 * @since 1.0
@@ -215,7 +226,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 */
 	public static function render($type = TRUE)
 	{
-		return Assets::instance()->_render($type);
+		return $type === TRUE ? Assets::instance()->_render_all() : Assets::instance()->_render($type);
 	}
 
 
@@ -238,7 +249,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 				return URL::base() . $this->_config->assets_url . $this->_config->known_assets[$type][$file] . '.' . $type;
 			}
 		}
-
 		// The file isn't predefined, search for it in all predefined asset folders
 		if (array_key_exists($type, $this->_config->assets_paths) && !empty($this->_config->assets_paths[$type])) {
 			foreach ($this->_config->assets_paths[$type] as $path) {

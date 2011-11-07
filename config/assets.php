@@ -19,6 +19,20 @@ return array(
 	'assets_url' => NULL,
 
 	/**
+	 * Automatically search for (and include) a matching resource file for
+	 * the current controller/action
+	 *
+	 * For action_dog() of the controller Controller_Pet
+	 * the following files get included (if exist)
+	 * css/pet/dog.css
+	 * js/pet/dog.js
+	 * less/pet/dog.less
+	 *
+	 * @since 1.2
+	 */
+	'auto_include' => TRUE,
+
+	/**
 	 * Array of asset folder locations relative to the DOCROOT
 	 * array('css' => array('assets/css/'), 'js' => array(), ...
 	 * These paths will be searched for the assets you include
