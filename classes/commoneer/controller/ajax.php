@@ -14,12 +14,32 @@
 abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 {
 
+	public function before()
+	{
+
+		// AJAX responses don't need HTML templates
+		if (Request::current()->is_ajax()) {
+			$this->auto_render = FALSE;
+		}
+		parent::before();
+	}
+
+
+	protected function _check_login()
+	{
+
+		// Redirect if not logged in
+		if ($this->_require_login && !Auth::instance()->logged_in()) {
+			$this->respond(Controller_Ajax::STATUS_UNAUTHORIZED, 'You are not logged in.');
+		}
+
+	}
 
 	// Will be returned as JSON.status
-	const STATUS_OK             = 200;
-	const STATUS_ERROR          = -1;
-	const STATUS_BAD_REQUEST    = 400;
-	const STATUS_UNAUTHORIZED   = 401;
+	const STATUS_OK = 200;
+	const STATUS_ERROR = -1;
+	const STATUS_BAD_REQUEST = 400;
+	const STATUS_UNAUTHORIZED = 401;
 
 	/**
 	 * Whether to use the 'bare' response format,
@@ -56,7 +76,7 @@ abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 			}
 		}
 		// Return the JSON data.
-		$this->response->headers('Content-Type','application/json');
+		$this->response->headers('Content-Type', 'application/json');
 		$this->response->body(json_encode($data));
 
 		// Exit with proper encoding and JSON body

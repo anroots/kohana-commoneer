@@ -25,7 +25,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 * Whether accessing the current controller requires login
 	 * @var bool
 	 */
-	private $_require_login = FALSE;
+	protected $_require_login = FALSE;
 
 
 	/**
@@ -40,7 +40,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 * Default views folder
 	 * @var string
 	 */
-	private $_default_view_path = 'views';
+	protected $_default_view_path = 'views';
 
 
 	/**
@@ -89,24 +89,29 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	}
 
 
+	/**
+	 * Check login
+	 *
+	 * @since 1.2
+	 * @return void
+	 */
+	protected function _check_login()
+	{
+		// Redirect if not logged in
+		if ($this->_require_login && !Auth::instance()->logged_in()) {
+			$this->request->redirect($this->_login_url);
+		}
+	}
+
+
 	public function before()
 	{
-
-		// AJAX responses don't need HTML templates
-		if (Request::current()->is_ajax()) {
-			$this->auto_render = FALSE;
-		}
-
 		parent::before();
 
 		$this->id = $this->request->param('id');
 		$this->param = $this->request->param('param');
 
-		// Redirect if not logged in
-		if ($this->_require_login && !Auth::instance()->logged_in()) {
-			$this->request->redirect($this->_login_url);
-		}
-
+		$this->_check_login();
 
 		/**
 		 * Assign all controllers and actions a default view - convention over configuration!
