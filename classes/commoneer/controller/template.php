@@ -83,7 +83,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 * @param bool $require TRUE if login is required for the current controller
 	 * @return void
 	 */
-	public function require_login($require = FALSE)
+	public function require_login($require = TRUE)
 	{
 		$this->_require_login = (bool)$require;
 	}
