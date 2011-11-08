@@ -1,5 +1,5 @@
 Commoneer version 1.2 RELEASE CANDIDATE
-=========
+=======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
 The module extends several Kohana's built-in helpers, providing additional functions and behaviours.
@@ -14,7 +14,8 @@ No need to write if statements to your master template file when all you have to
     Assets::use_script('tablesorter')
 to your controller action and the script gets included.
 
-**Controller_Template** extension - Adds convention over configuration automatic view detection and convenience attributes
+**Controller_Template** - Adds convention over configuration automatic view detection and convenience attributes
+**Controller_Ajax** - Call $this->respond($data); and have JSON output out of the box
 **Commoneer_ORM** - Extends the ORM module, overriding the delete() and adding get()
 
 Extended Helpers
