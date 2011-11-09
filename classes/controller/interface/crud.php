@@ -9,9 +9,22 @@
 interface Controller_Interface_Crud
 {
 
-	public function action_show();
+	/**
+	 * @abstract
+	 * @return void
+	 */
+	public function action_read();
 
-	public function action_edit();
+	/**
+	 * Also contains action_create
+	 * @abstract
+	 * @return void
+	 */
+	public function action_update();
 
-	public function action_destroy();
+	/**
+	 * @abstract
+	 * @return void
+	 */
+	public function action_delete();
 }
