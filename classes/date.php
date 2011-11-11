@@ -47,14 +47,18 @@ class Date extends Kohana_Date
 	 * @static
 	 * @param string $date Any valid date string
 	 * @param bool $include_time If true, return H:i:s also
-	 * @return null|string
+	 * @return null|string NULL on format error, MYSQL format date otherwise
 	 */
 	public static function mysql_date($date, $include_time = TRUE)
 	{
 		if (empty($date)) {
 			return NULL;
 		}
-		if (!strtotime($date) && $date > 1) {
+
+		if (!strtotime($date)) { // Assume date is a timestamp
+			if (!is_numeric($date)) { // Malformed string!
+				return NULL;
+			}
 			$date = date('Y-m-d H:i:s', $date);
 		}
 

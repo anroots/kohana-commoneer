@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Basic CRUD interface
+ *
  * @since 1.2
  * @package Commoneer
  * @category Controller

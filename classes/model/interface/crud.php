@@ -17,7 +17,7 @@ interface Model_Interface_Crud {
      * @param bool $execute Whether to execute the query (TRUE) or only apply the filters and return $this
      * @return ORM
      */
-     public function get($filters, $execute = TRUE);
+     public function get($filters = NULL, $execute = TRUE);
 
     /**
      * Create or update an existing row
@@ -34,7 +34,7 @@ interface Model_Interface_Crud {
     /**
      * Mark the row as deleted by setting deleted = 1
      *
-     * We never-ever permanently delete an important record,
+     * We never-ever permanently delete a record
      *
      * @abstract
      * @return void
