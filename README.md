@@ -1,10 +1,16 @@
-Commoneer version 1.2 RELEASE CANDIDATE
+Commoneer Version 1.2 (released 15. Nov 2011)
 =======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
-The module extends several Kohana's built-in helpers, providing additional functions and behaviours.
+The module extends several Kohana's built-in classes providing additional functions and behaviour.
 
 The module strongly reflects my developing style and might not me suitable for everyone.
+
+Core Philosophy
+---------------
+
+One should be able to do more with less code, thereby strong convention over configuration approach is taken. Controllers are smart enough to find their own views and assets.
+Extendable classes lay out the groundwork for common operations such as delete and find_all.
 
 Included Classes
 ----------------

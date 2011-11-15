@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Commoneer ORM extension
+ * 
  * @since 1.1
  * @throws Exception_Not_Allowed
  * @package Commoneer
@@ -22,6 +23,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 
 	/**
 	 * @var bool Set to TRUE to enable automagical deleted column features
+	 * @since 1.2
 	 * If TRUE and the table has a deleted column, treats entities with deleted=1 as nonexistent
 	 */
 	protected $_is_deletable = FALSE;
@@ -29,10 +31,12 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	
 	/**
 	 * @var bool Whether or not the current model has 'deleted' column
+	 * @since 1.2
 	 */
 	private $_has_deleted = FALSE;
 
 	/**
+	 * @since 1.2
 	 * @param null $id
 	 */
 	public function __construct($id = NULL)
@@ -128,6 +132,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	 * Find all matching rows
 	 *
 	 * This override adds deleted checking
+	 * @since 1.2
 	 * @return void
 	 */
 	public function find_all()
