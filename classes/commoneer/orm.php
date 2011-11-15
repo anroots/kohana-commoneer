@@ -20,6 +20,26 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	 */
 	protected $_allowed_filters = FALSE;
 
+	/**
+	 * @var bool Set to TRUE to enable automagical deleted column features
+	 * If TRUE and the table has a deleted column, treats entities with deleted=1 as nonexistent
+	 */
+	protected $_is_deletable = FALSE;
+	
+	
+	/**
+	 * @var bool Whether or not the current model has 'deleted' column
+	 */
+	private $_has_deleted = FALSE;
+
+	/**
+	 * @param null $id
+	 */
+	public function __construct($id = NULL)
+	{
+		parent::__construct($id);
+		$this->_has_deleted = array_key_exists('deleted', $this->table_columns());
+	}
 
 	/**
 	 * Get a single or several ORM records, based on $filters
@@ -37,7 +57,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 		}
 
 		// We don't want deleted rows!
-		if (array_key_exists('deleted', $this->table_columns()) && !isset($filters['deleted'])) {
+		if ($this->_is_deletable && $this->_has_deleted && !isset($filters['deleted'])) {
 			$this->where('deleted', '=', 0);
 		}
 
@@ -86,7 +106,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	{
 
 		// The deleted column does not exist, we have no choice
-		if (!array_key_exists('deleted', $this->table_columns())) {
+		if (!$this->_is_deletable || !array_key_exists('deleted', $this->table_columns())) {
 			return parent::delete();
 		}
 
@@ -103,6 +123,20 @@ abstract class Commoneer_ORM extends Kohana_ORM
 		return FALSE;
 	}
 
+
+	/**
+	 * Find all matching rows
+	 *
+	 * This override adds deleted checking
+	 * @return void
+	 */
+	public function find_all()
+	{
+		if ($this->_is_deletable && $this->_has_deleted) {
+			$this->where(Inflector::singular($this->table_name()).'.deleted', '=', 0);
+		}
+		return parent::find_all();
+	}
 
 	/**
 	 * @since 1.1
