@@ -118,8 +118,13 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 		 * View files shall be named like so: APPPATH/views/CONTROLLER/ACTION.php
 		 * So controller "dash" action "index" will have the view APPPATH/views/dash/index
 		 **/
-		$view_convention = $this->request->directory() . DIRECTORY_SEPARATOR .
-		                   $this->request->controller() . DIRECTORY_SEPARATOR . $this->request->action();
+
+
+		// DIRECTORY / CONTROLLER / ACTION
+		// Ignore dir if empty
+		$view_convention = $this->request->directory() === '/' ? $this->request->directory()
+				: NULL . DIRECTORY_SEPARATOR .
+				  $this->request->controller() . DIRECTORY_SEPARATOR . $this->request->action();
 
 
 		// If view folder is not default append custom path to the view file path
