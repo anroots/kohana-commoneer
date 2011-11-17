@@ -119,12 +119,12 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 		 * So controller "dash" action "index" will have the view APPPATH/views/dash/index
 		 **/
 
-
 		// DIRECTORY / CONTROLLER / ACTION
 		// Ignore dir if empty
-		$view_convention = $this->request->directory() === '/' ? $this->request->directory()
-				: NULL . DIRECTORY_SEPARATOR .
-				  $this->request->controller() . DIRECTORY_SEPARATOR . $this->request->action();
+		$dir = $this->request->directory();
+
+		$dir = empty($dir) ? NULL : $dir . DIRECTORY_SEPARATOR;
+		$view_convention = $dir . $this->request->controller() . DIRECTORY_SEPARATOR . $this->request->action();
 
 
 		// If view folder is not default append custom path to the view file path
