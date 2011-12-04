@@ -148,7 +148,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	{
 		if (!$this->request->is_ajax() && $this->template) {
 			// The default application title
-			$this->template->title = empty($this->title) ? Kohana::$config->load('app.title') : $this->title;
+			$this->template->title = empty($this->title) && $this->title !== FALSE ? Kohana::$config->load('app.title') : $this->title;
 			$this->template->content = $this->content;
 		}
 		parent::after();
