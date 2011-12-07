@@ -21,7 +21,9 @@ No need to write if statements to your master template file when all you have to
 to your controller action and the script gets included.
 
 **Controller_Template** - Adds convention over configuration automatic view detection and convenience attributes
+
 **Controller_Ajax** - Call $this->respond($data); and have JSON output out of the box
+
 **Commoneer_ORM** - Extends the ORM module, overriding the delete() and adding get()
 
 Extended Helpers
