@@ -1,8 +1,8 @@
-Commoneer Version 1.3 RELEASE CANDIDATE
+Commoneer Version 1.3 (Dec 17 2011)
 =======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
-The module extends several Kohana's built-in classes providing additional functions and behaviour.
+The module extends several Kohana's built-in classes, providing additional functions and behaviour.
 
 The module strongly reflects my developing style and might not me suitable for everyone.
 
@@ -26,6 +26,8 @@ to your controller action and the script gets included.
 
 **Commoneer_ORM** - Extends the ORM module, overriding the delete() and adding get()
 
+**Overriden error pages** - We don't want clients to see the default stacktrace on Production, show a friendlier error page isntead.
+
 Extended Helpers
 ----------------
 * Date - Convert dates to localized / mysql format
@@ -34,10 +36,26 @@ Extended Helpers
 * Arr
 * Validation - recursively display (ORM) error messages
 
+
 Install
 =======
 
-Copy to Kohana's modules folder and rename to commoneer. Add a line to application/bootstrap.php to enable it.
+Standard Kohana module install:
+
+# Clone the repository into your MODPATH folder:
+
+	cd your/modules/folder
+	git clone git@github.com:anroots/kohana-commoneer.git
+
+# Add a line to the modules definition in application/bootstrap.php to enable Commoneer
+
+	Kohana::modules(array(
+	  'auth' => MODPATH . 'auth',
+	  ...
+	  'commoneer' => MODPATH. 'commoneer',
+	  );
+
+# See the userguide and API browser for usage information (enable the userguide module and visit http://localhost/your-kohana-installation/guide)
 
 Maintenance and versioning
 ==========================

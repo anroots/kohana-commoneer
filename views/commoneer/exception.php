@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title><?=__('Error')?> :(</title>
-	<!-- Original page design by HTML5 Boilerplate-->
+	<!-- Original page design by Paul Irish (HTML5 Boilerplate) -->
 	<style>
 		body {
 			text-align: center;
