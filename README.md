@@ -42,20 +42,20 @@ Install
 
 Standard Kohana module install:
 
-# Clone the repository into your MODPATH folder:
+* Clone the repository into your MODPATH folder:
 
-	cd your/modules/folder
-	git clone git@github.com:anroots/kohana-commoneer.git
+    cd your/modules/folder
+    git clone git@github.com:anroots/kohana-commoneer.git
 
-# Add a line to the modules definition in application/bootstrap.php to enable Commoneer
+* Add a line to the modules definition in application/bootstrap.php to enable Commoneer
 
-	Kohana::modules(array(
-	  'auth' => MODPATH . 'auth',
-	  ...
-	  'commoneer' => MODPATH. 'commoneer',
-	  );
+    Kohana::modules(array(
+    'auth' => MODPATH . 'auth',
+    ...
+    'commoneer' => MODPATH. 'commoneer',
+    );
 
-# See the userguide and API browser for usage information (enable the userguide module and visit http://localhost/your-kohana-installation/guide)
+* See the userguide and API browser for usage information (enable the userguide module and visit http://localhost/your-kohana-installation/guide)
 
 Maintenance and versioning
 ==========================
