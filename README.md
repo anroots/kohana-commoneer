@@ -1,4 +1,4 @@
-Commoneer Version 1.3 (Dec 17 2011)
+Commoneer Version 1.4 Release Candidate
 =======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
@@ -45,7 +45,7 @@ Standard Kohana module install:
 * Clone the repository into your MODPATH folder:
 
     cd your/modules/folder
-    git clone git@github.com:anroots/kohana-commoneer.git
+   git://github.com/anroots/kohana-commoneer.git
 
 * Add a line to the modules definition in application/bootstrap.php to enable Commoneer
 
