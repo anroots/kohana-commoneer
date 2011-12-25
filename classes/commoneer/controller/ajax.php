@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 /**
- * Provides AJAX functionality
+ * Provides AJAX functionality to controllers
  *
  * Every response has a bare minimum of 2 attributes (unless specifically denied):
  * json.status, which is a numeric status code and json.response, containing any textual data
@@ -13,27 +13,6 @@
  */
 abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 {
-
-	public function before()
-	{
-
-		// AJAX responses don't need HTML templates
-		if (Request::current()->is_ajax()) {
-			$this->auto_render = FALSE;
-		}
-		parent::before();
-	}
-
-
-	protected function _check_login()
-	{
-
-		// Redirect if not logged in
-		if ($this->_require_login && !Auth::instance()->logged_in()) {
-			$this->respond(Controller_Ajax::STATUS_UNAUTHORIZED, 'You are not logged in.');
-		}
-
-	}
 
 	// Will be returned as JSON.status
 	const STATUS_OK = 200;
@@ -48,6 +27,40 @@ abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 	 * @var bool
 	 */
 	protected $_bare = FALSE;
+
+	public function before()
+	{
+		// AJAX responses don't need HTML templates
+		if (Request::current()->is_ajax()) {
+			$this->auto_render = FALSE;
+		}
+		parent::before();
+	}
+
+
+	/**
+	 * Check login on protected pages
+	 */
+	protected function _check_login()
+	{
+		if (!$this->_require_login) {
+			return;
+		}
+
+		/**
+		 * If the request isn't AJAX it's likely the user
+		 * accessed a controller providing some AJAX functionality, but the session
+		 * timed out. Redirect to login page instead of showing plain JSON response
+		 */
+		if (!Request::current()->is_ajax()) {
+			Request::current()->redirect($this->_login_url);
+		}
+
+		// Redirect if not logged in
+		if (!Auth::instance()->logged_in()) {
+			$this->respond(Controller_Ajax::STATUS_UNAUTHORIZED, 'You are not logged in.');
+		}
+	}
 
 	/**
 	 * Output a JSON response
