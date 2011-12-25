@@ -78,4 +78,19 @@ class Arr extends Kohana_Arr
 		}
 		return $input;
 	}
+
+
+    /**
+     * ucwords for callback to array_walk
+     *
+     * @see ucwords
+     * @see array_walk
+     * @static
+     * @param $value
+     * @param $key
+     * @return string
+     */
+    public static function ucwords(&$value, $key) {
+        $value = ucwords($value);
+    }
 }

@@ -77,14 +77,18 @@ class Date extends Kohana_Date
 	 * @see Date::set_format()
 	 * @see Date::$_format_long
 	 * @see Date::$_format_short
-	 * @param string $date Date string in any format
+	 * @param string $date Date string in any format, timestamp or empty for time()
 	 * @param bool $include_time Whether to return the long format
-	 * @return null|string
+	 * @return string Date string in the specified localized format
 	 */
-	public static function localized_date($date, $include_time = FALSE)
+	public static function localized_date($date = NULL, $include_time = FALSE)
 	{
-		if (empty($date) || !$date = strtotime($date)) {
-			return NULL;
+		if (is_numeric($date) && $date > 1) {
+			// Timestamp given, do nothing
+		} elseif (is_string($date) && !empty($date)) {
+			$date = strtotime($date);
+		} else { // Default: time()
+			$date = time();
 		}
 
 		return date((bool)$include_time ? Date::$_format_long : Date::$_format_short, $date);

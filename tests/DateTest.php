@@ -17,9 +17,10 @@ class DateTest extends Kohana_Unittest_TestCase
 		$this->assertEquals(date('Y-m-d', $time), Date::mysql_date(date('d.m.Y H:i:s', $time), FALSE)); // Estonian format input
 	}
 
-	function test_localized_date() {
-		$this->assertNull(Date::localized_date(''));
-		$this->assertNull(Date::localized_date(array()));
+	function test_localized_date()
+	{
+		$this->assertGreaterThanOrEqual(strtotime(Date::localized_date('')), time());
+		$this->assertGreaterThanOrEqual(strtotime(Date::localized_date(array())), time());
 
 		$date = date('m/d/Y H:i:s');
 		$local = date('d.m.Y H:i', strtotime($date));
@@ -32,7 +33,8 @@ class DateTest extends Kohana_Unittest_TestCase
 	}
 
 
-	function test_date_smaller_than() {
+	function test_date_smaller_than()
+	{
 		$this->assertFalse(Date::date_smaller_than('a', 'b'));
 		$this->assertFalse(Date::date_smaller_than(date('d.m.Y'), array()));
 		$this->assertFalse(Date::date_smaller_than(100, 100)); // No equality!
@@ -40,14 +42,15 @@ class DateTest extends Kohana_Unittest_TestCase
 		$this->assertTrue(Date::date_smaller_than(45, 100));
 
 		$d1 = date('d.m.Y H:i:s', time());
-		$d2 = date('d.m.Y H:i:s', time()+10);
+		$d2 = date('d.m.Y H:i:s', time() + 10);
 
 		$this->assertTrue(Date::date_smaller_than($d1, $d2));
 		$this->assertFalse(Date::date_smaller_than($d2, $d1));
 	}
 
 
-	function test_realistic_date() {
+	function test_realistic_date()
+	{
 		$this->assertFalse(Date::realistic_date(''));
 		$this->assertTrue(Date::realistic_date(date('d.m.Y', time())));
 		$this->assertFalse(Date::realistic_date(strtotime('05.02.1982')));

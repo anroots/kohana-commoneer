@@ -57,7 +57,7 @@ Standard Kohana module install:
 
 * See the userguide and API browser for usage information (enable the userguide module and visit http://localhost/your-kohana-installation/guide)
 
-Maintenance and versioning
+Maintenance and Versioning
 ==========================
 I'm using this module as a basis in most of my projects (daily) so as soon as new idea hits me, I'll probably add them here.
 The master always holds the latest working version and previous and next versions are visible as branches.
