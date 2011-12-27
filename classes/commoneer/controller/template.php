@@ -23,6 +23,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 
 	/**
 	 * Whether accessing the current controller requires login
+     *
 	 * @var bool
 	 */
 	protected $_require_login = FALSE;

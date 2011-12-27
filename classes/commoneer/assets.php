@@ -2,9 +2,11 @@
 
 /**
  * Handles the inclusion of static assets such as css and js files.
+ *
  * This class makes it simple to use stylesheets and scrips on as-needed basis
  * so you don't have to include everything in your template, always.
  *
+ * @example Assets::use_script('tablesorter'); echo Assets::render();
  * @since 1.0
  * @package Commoneer
  * @author Ando Roots 2011
@@ -23,7 +25,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Singleton pattern, store instance
-	 * @var
+	 * @var Commoneer_Assets
 	 */
 	protected static $_instance;
 
@@ -66,9 +68,10 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Get the singleton instance of the class
+	 *
 	 * @since 1.0
 	 * @static
-	 * @return object
+	 * @return Commoneer_Assets
 	 */
 	public static function instance()
 	{
@@ -82,6 +85,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Add a new script file to the current request
+	 *
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
@@ -96,6 +100,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Add a new style to the current request
+	 *
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
@@ -110,6 +115,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Add a new css file to the current request
+	 *
 	 * @since 1.0
 	 * @static
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
@@ -121,6 +127,37 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 		return Assets::instance();
 	}
 
+
+	/**
+	 * Include a preset
+	 *
+	 * Presets are groups of known (defined in the config file) assets
+	 *
+	 * @since 1.4
+	 * @static
+	 * @param string $alias The alias of the preset
+	 * @return Commoneer_Assets
+	 */
+	public static function preset($alias)
+	{
+		$presets = Assets::instance()->_config->get('presets');
+
+		if (!array_key_exists($alias, $presets)) {
+			throw new Kohana_Exception("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
+		}
+
+		// Loop over all types of assets (style,script) in the preset
+		foreach ($presets[$alias] as $type => $values) {
+			if (empty($values)) {
+				continue;
+			}
+
+			// Add assets of this type
+			Assets::instance()->_add_resource($type, $values);
+
+		}
+		return Assets::instance();
+	}
 
 	/**
 	 * Add HTML of the appropriate type to the load que
@@ -162,6 +199,9 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 				case Assets::CSS:
 					$this->_assets[$type][$file] = HTML::style($path);
 					break;
+				default:
+					throw new Kohana_Exception('Unknown asset type for inclusion: :name', array(':name' => $type));
+					break;
 			}
 		}
 	}
@@ -182,8 +222,8 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 		// Auto include matching controller/action resource files
 		if ($this->_config->auto_include) {
-			$file = Request::current()->controller().DIRECTORY_SEPARATOR.Request::current()->action();
-				$this->_add_resource($type, $file);
+			$file = Request::current()->controller() . DIRECTORY_SEPARATOR . Request::current()->action();
+			$this->_add_resource($type, $file);
 		}
 
 

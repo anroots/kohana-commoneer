@@ -47,17 +47,18 @@ abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template
 			return;
 		}
 
-		/**
-		 * If the request isn't AJAX it's likely the user
-		 * accessed a controller providing some AJAX functionality, but the session
-		 * timed out. Redirect to login page instead of showing plain JSON response
-		 */
-		if (!Request::current()->is_ajax()) {
-			Request::current()->redirect($this->_login_url);
-		}
-
 		// Redirect if not logged in
 		if (!Auth::instance()->logged_in()) {
+
+			/**
+			 * If the request isn't AJAX it's likely the user
+			 * accessed a controller providing some AJAX functionality, but the session
+			 * timed out. Redirect to login page instead of showing plain JSON response
+			 */
+			if (!Request::current()->is_ajax()) {
+				Request::current()->redirect($this->_login_url);
+			}
+
 			$this->respond(Controller_Ajax::STATUS_UNAUTHORIZED, 'You are not logged in.');
 		}
 	}

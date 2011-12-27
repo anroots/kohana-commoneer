@@ -38,32 +38,53 @@ return array(
 	 * These paths will be searched for the assets you include
 	 * **/
 	'assets_paths' => array(
-		'css' => array(
+		Assets::CSS => array(
 			'assets/css/',
 			'assets/shared/css/',
 		),
-		'js' => array(
+		ASSETS::SCRIPT => array(
 			'assets/js/', // Project specific
 			'assets/shared/js/', // Shared is symlink to resource repository
 		),
-		'less' => array(
+		ASSETS::STYLE => array(
 			'assets/less/',
 		)
 	),
 
 	/**
 	 * Predefined assets - a match from here will be searched for first.
+	 *
 	 * Syntax: alias (what you use to include the asset) => path (relative to the DOCROOT, no file extension
 	 */
 	'known_assets' => array(
-		'css' => array(
+		Assets::CSS => array(
 
 		),
-		'js' => array(
-			'hoverintent' => 'shared/js/libs/hoverintent-v6.min',
+		ASSETS::SCRIPT => array(
+			// Example: 'tablesorter' => 'assets/js/libs/tablesorter-1.min'
 		),
-		'less' => array(
+		ASSETS::STYLE => array(
 
+		)
+	),
+
+	/**
+	 * Define presets i.e. several includes with one alias
+	 *
+	 * Syntax: alias => array('first_include', 'second_include')
+	 * Includes must be known assets (defined above)
+	 *
+	 * @since 1.4
+	 */
+	'presets' => array(
+
+		'preset1' => array(
+			Assets::CSS => array(
+				'tablesorter'
+			),
+			ASSETS::SCRIPT => array(
+				'tablesorter'
+			)
 		)
 	)
 );
