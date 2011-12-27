@@ -78,14 +78,14 @@ return array(
 	 */
 	'presets' => array(
 
-		'preset1' => array(
+		/*'preset1' => array(
 			Assets::CSS => array(
 				'tablesorter'
 			),
 			ASSETS::SCRIPT => array(
 				'tablesorter'
-			)
-		)
+			),
+		)*/
 	)
 );
 

@@ -22,6 +22,13 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	const SCRIPT = 'js';
 	const STYLE = 'less';
 
+	/**
+	 * Known asset types as an array
+	 *
+	 * @since 1.4
+	 * @var array
+	 */
+	protected static $_assets_types = array(Commoneer_Assets::CSS, Commoneer_Assets::SCRIPT, Commoneer_Assets::STYLE);
 
 	/**
 	 * Singleton pattern, store instance
@@ -133,6 +140,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 *
 	 * Presets are groups of known (defined in the config file) assets
 	 *
+	 * @throws Exception_Sarcasm
 	 * @since 1.4
 	 * @static
 	 * @param string $alias The alias of the preset
@@ -143,7 +151,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 		$presets = Assets::instance()->_config->get('presets');
 
 		if (!array_key_exists($alias, $presets)) {
-			throw new Kohana_Exception("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
+			throw new Exception_Sarcasm("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
 		}
 
 		// Loop over all types of assets (style,script) in the preset
@@ -165,6 +173,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * Example: _add_resource(Assets::STYLE, 'common.less')
 	 * would add <style type...> to be included in the HEAD
 	 *
+	 * @throws Exception_Sarcasm
 	 * @since 1.0
 	 * @param const $type One of the asset types (STYLE, SCRIPT, CSS)
 	 * @param mixed $names A single file or an array of file paths relative to the asset root
@@ -199,25 +208,38 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 				case Assets::CSS:
 					$this->_assets[$type][$file] = HTML::style($path);
 					break;
-				default:
-					throw new Kohana_Exception('Unknown asset type for inclusion: :name', array(':name' => $type));
-					break;
 			}
 		}
 	}
 
+	/**
+	 * Get a list of known assets types
+	 *
+	 * @since 1.4
+	 * @static
+	 * @return array An array of asset types
+	 */
+	public static function known()
+	{
+		return Commoneer_Assets::$_assets_types;
+	}
 
 	/**
 	 * Return asset HTML includes
 	 *
 	 * ...and clear the include que
 	 *
+	 * @throws Exception_Sarcasm
 	 * @since 1.0
 	 * @param string $type The type of assets to render (script/style)
 	 * @return string|null HTML markup
 	 */
 	private function _render($type = NULL)
 	{
+		if (!in_array($type, Commoneer_Assets::known())) {
+			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
+		}
+
 		$html = NULL;
 
 		// Auto include matching controller/action resource files
@@ -276,6 +298,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * Look for the predefined assets first
 	 * Search in all defined assets paths
 	 *
+	 * @throws Exception_Sarcasm
 	 * @since 1.0
 	 * @param string $type Asset type
 	 * @param string $file Partial file path
@@ -283,6 +306,10 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 */
 	private function _find_file($type, $file)
 	{
+		if (!in_array($type, Commoneer_Assets::known())) {
+			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
+		}
+
 		// If the file is an alias to a known asset, get it's path from the config file
 		if (array_key_exists($type, $this->_config->assets_paths)) {
 			if (array_key_exists($file, $this->_config->known_assets[$type])) {
