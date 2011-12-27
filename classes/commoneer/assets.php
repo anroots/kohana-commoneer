@@ -138,7 +138,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	/**
 	 * Include a preset
 	 *
-	 * Presets are groups of known (defined in the config file) assets
+	 * Presets are groups of assets defined in the config file preset subsection
 	 *
 	 * @throws Exception_Sarcasm
 	 * @since 1.4

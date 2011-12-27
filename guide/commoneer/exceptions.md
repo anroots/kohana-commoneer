@@ -4,6 +4,7 @@ Commoneer includes some new throwable exceptions, currently only for semantics.
 
 * Exception_Not_Allowed
 * Exception_Not_Implemented
+* Exception_Sarcasm
 
 Custom Error Design on Production
 =================================

@@ -1,6 +1,6 @@
 # Assets
 
-Comoneer includes an assets manager class that takes care of dynamically including dependencies like jQuery onoly the pages you specify.
+Comoneer includes an assets manager class that takes care of dynamically including static assets like jQuery plugins on only the pages you specify.
 The advantage of this is that you don't have to load all your CSS files/libraries on every page you load just to use it once or twice.
 
 The purpose of the Assets class is not to minify/combine asset files although this could be a further development goal.
@@ -12,11 +12,11 @@ Usage
 =====
 
 * Copy `MODPATH/commoneer/config/assets.php` to `APPPATH/config/assets.php` and change appropriate values.
-* Use one of the three inclusion calls where appropriate:
-    `Assets::use_style();` for LESS, `Assets::use_script();` for JavaScript and `Assets::use_css();` for CSS files.
+* Use one of the three inclusion calls (or the preset call) in your controller actions:
+    `Assets::use_style();` for LESS, `Assets::use_script();` for JavaScript and `Assets::use_css();` for CSS files. You can group includes into presets and call that instead (see the config file).
 * Call `Assets::render()` in your template to output the generated HTML.
 You can echo different resource types separately, for example one would use `Assets::render(Assets:LESS);` in the `<head>`
-section of the template and `Assets::render(Assets::SCRIPT);` just below the `<body>` tag.
+section of the template and `Assets::render(Assets::SCRIPT);` just above the `</body>` tag.
 
 To dynamically include assets you call one of the three inclusion functions during the execution of the request. To add a style to controllers/dashboard/action_index you would use:
 
@@ -27,6 +27,8 @@ To dynamically include assets you call one of the three inclusion functions duri
     Assets::use_css('reset'); // A normal CSS file
 
     Assets::use_script(array('modal', 'jquery')); // Load some scripts in the dashboard too
+
+	Assets::preset('date_scripts'); // Include the preset 'date_scripts' that might contain several styles and/or scripts
 
 For `use_css()`, `use_script()` and `use_style()` to work you must first specify the include paths in *config/assets.php*.
 
@@ -42,6 +44,8 @@ The *known_assets* array consists of alias => file path to the asset file. You c
 
 The *assets_path* defines the directories where assets files are located. Each of these locations is searched for the file when you call `use_*type*()`.
 
+*presets* is used to group together assets that are used together.
+
 Rendering
 =========
 
@@ -50,3 +54,5 @@ The asset que is cleared after a `render()` call.
 
     Assets::render(); // Outputs all included LESS, CSS and JS files as HTML includes, clears everything
     Assets::render(ASSETS::STYLE); // Output only LESS styles, clears the STYLE que
+
+See the API documentation of the Commoneer_Assets class for more info about specific methods.
