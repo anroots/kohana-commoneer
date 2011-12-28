@@ -26,7 +26,7 @@ to your controller action and the script gets included.
 
 **Commoneer_ORM** - Extends the ORM module, overriding the delete() and adding get()
 
-**Overriden error pages** - We don't want clients to see the default stacktrace on Production, show a friendlier error page isntead.
+**Overriden error pages** - We don't want clients to see the default stacktrace on Production, show a friendlier error page instead.
 
 Extended Helpers
 ----------------
@@ -44,7 +44,7 @@ Standard Kohana module install:
 
 * Clone the repository into your MODPATH folder:
 
-    cd your/modules/folder
+    cd your/modules/folder &&
    git://github.com/anroots/kohana-commoneer.git
 
 * Add a line to the modules definition in application/bootstrap.php to enable Commoneer

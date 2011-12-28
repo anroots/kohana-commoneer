@@ -45,14 +45,14 @@ class Date extends Kohana_Date
 	 *
 	 * @example: Date::mysql_date(31.12.2001 00:00:06, FALSE) == '2011-12-31'
 	 * @static
-	 * @param string $date Any valid date string
+	 * @param string|int|null $date Any valid date string
 	 * @param bool $include_time If true, return H:i:s also
 	 * @return null|string NULL on format error, MYSQL format date otherwise
 	 */
-	public static function mysql_date($date, $include_time = TRUE)
+	public static function mysql_date($date = NULL, $include_time = TRUE)
 	{
 		if (empty($date)) {
-			return NULL;
+			$date = time();
 		}
 
 		if (!strtotime($date)) { // Assume date is a timestamp
