@@ -244,7 +244,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 		// Auto include matching controller/action resource files
 		if ($this->_config->auto_include) {
-			$file = Request::current()->controller() . DIRECTORY_SEPARATOR . Request::current()->action();
+			$file = (Request::current()->directory() ? Request::current()->directory() . DIRECTORY_SEPARATOR : NULL) . Request::current()->controller() . DIRECTORY_SEPARATOR . Request::current()->action();
 			$this->_add_resource($type, $file);
 		}
 
