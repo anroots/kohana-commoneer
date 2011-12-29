@@ -314,7 +314,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 		// If the file is an alias to a known asset, get it's path from the config file
 		if (array_key_exists($type, $this->_config->assets_paths)) {
 			if (array_key_exists($file, $this->_config->known_assets[$type])) {
-				return (URL::base() == '/' ? NULL : URL::base()) . $this->_config->assets_url . $this->_config->known_assets[$type][$file] . '.' . $type;
+				return $this->_config->assets_url . $this->_config->known_assets[$type][$file] . '.' . $type;
 			}
 		}
 		// The file isn't predefined, search for it in all predefined asset folders
