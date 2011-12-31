@@ -141,28 +141,36 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 * Presets are groups of assets defined in the config file preset subsection
 	 *
 	 * @throws Exception_Sarcasm
+	 * @example Assets::instance()->preset('dates');
+	 * @example Assets::instance()->preset(array('jquery-ui', 'dates'));
 	 * @since 1.4
 	 * @static
-	 * @param string $alias The alias of the preset
+	 * @param string|array $aliases The alias(es) of the preset
 	 * @return Commoneer_Assets
 	 */
-	public static function preset($alias)
+	public static function preset($aliases)
 	{
 		$presets = Assets::instance()->_config->get('presets');
 
-		if (!array_key_exists($alias, $presets)) {
-			throw new Exception_Sarcasm("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
+		if (!is_array($aliases)) {
+			$aliases = array($aliases);
 		}
 
-		// Loop over all types of assets (style,script) in the preset
-		foreach ($presets[$alias] as $type => $values) {
-			if (empty($values)) {
-				continue;
+		foreach ($aliases as $alias) {
+			if (!array_key_exists($alias, $presets)) {
+				throw new Exception_Sarcasm("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
 			}
 
-			// Add assets of this type
-			Assets::instance()->_add_resource($type, $values);
+			// Loop over all types of assets (style,script) in the preset
+			foreach ($presets[$alias] as $type => $values) {
+				if (empty($values)) {
+					continue;
+				}
 
+				// Add assets of this type
+				Assets::instance()->_add_resource($type, $values);
+
+			}
 		}
 		return Assets::instance();
 	}
@@ -327,8 +335,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 			}
 
 		}
-
-		Kohana::$log->write(Kohana_Log::ERROR, 'Tried to load asset "' . $file . '", but got error 404.');
+		Log::instance()->write(Kohana_Log::ERROR, 'Tried to load asset "' . $file . '", but got error 404.');
 		return FALSE;
 	}
 
