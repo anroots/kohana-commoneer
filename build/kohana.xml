@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Common Kohana build actions -->
+<project name="kohana" basedir="." default="kohana-build">
+
+	<dirname property="kohana.basedir" file="${ant.file.kohana}"/>
+	<property file="${kohana.basedir}/kohana.properties"/>
+
+	<!-- Threading -->
+	<target name="tools-parallel"
+	        description="Run tools in parallel">
+		<parallel threadCount="2">
+			<antcall target="minify"/>
+			<antcall target="lint"/>
+		</parallel>
+	</target>
+
+
+	<!-- Minify Javascript -->
+	<target name="minify" description="Uses the YUI Compressor engine to combine and minify JS">
+
+		<echo message="Starting JavaScript minification on '${basedir}/assets/js' (recursive)."/>
+
+		<apply executable="java" parallel="false" dest="${basedir}/assets/js">
+
+			<!-- Files -->
+			<fileset dir="${basedir}/assets/js">
+				<include name="**/*.js"/>
+				<exclude name="**/*.min.js*"/>
+			</fileset>
+
+			<!-- Command line args -->
+			<arg line="-jar"/>
+			<arg path="${yuicompressor.lib.path}"/>
+			<arg line="-v"/>
+			<srcfile/>
+			<arg line="-o"/>
+			<mapper type="glob" from="*" to="*.ant.min"/>
+			<targetfile/>
+
+		</apply>
+
+		<!-- Overwrite .js with minified versions -->
+		<move todir="${basedir}" overwrite="true">
+			<fileset dir="${basedir}/assets/js/"/>
+			<mapper type="glob" from="*.ant.min" to="/assets/js/*"/>
+		</move>
+
+		<echo message="JavaScript minified."/>
+	</target>
+
+	<!-- Cleanup -->
+	<target name="clean" description="Cleanup build artifacts">
+		<delete dir="${basedir}/build/api"/>
+		<delete dir="${basedir}/build/code-browser"/>
+		<delete dir="${basedir}/build/coverage"/>
+		<delete dir="${basedir}/build/logs"/>
+		<delete dir="${basedir}/build/pdepend"/>
+		<delete dir="${basedir}/application/logs"/>
+		<delete dir="${basedir}/application/cache"/>
+	</target>
+
+	<!-- Create build and app log directories -->
+	<target name="prepare" depends="clean"
+	        description="Prepare for build">
+
+		<!-- Create -->
+		<mkdir dir="${basedir}/build/api"/>
+		<mkdir dir="${basedir}/build/code-browser"/>
+		<mkdir dir="${basedir}/build/coverage"/>
+		<mkdir dir="${basedir}/build/logs"/>
+		<mkdir dir="${basedir}/build/pdepend"/>
+
+		<!-- Kohana dirs -->
+		<mkdir dir="${basedir}/application/logs"/>
+		<mkdir dir="${basedir}/application/cache"/>
+
+		<!-- Chmod -->
+		<echo message="Making system folders writable..."/>
+		<chmod perm="777" file="${basedir}/application/logs" type="both"/>
+		<chmod perm="777" file="${basedir}/application/cache" type="both"/>
+
+	</target>
+
+	<!-- PHP Syntax check -->
+	<target name="lint">
+		<apply executable="php" failonerror="true">
+			<arg value="-l"/>
+
+			<fileset dir="${basedir}/application">
+				<include name="**/*.php"/>
+				<modified/>
+			</fileset>
+
+		</apply>
+	</target>
+
+	<!-- PHPUnit tests - must be called manually from the master build file -->
+	<target name="phpunit" description="Run unit tests with PHPUnit">
+		<exec dir="application" executable="phpunit" failonerror="true">
+			<arg value="--configuration=tests/phpunit.xml"/>
+			<arg value="tests/model"/>
+		</exec>
+	</target>
+
+	<!-- Default actions to be taken on any build -->
+	<target name="kohana-build" description="Common actions for any Kohana project build">
+		<antcall target="tools-parallel"/>
+		<antcall target="prepare"/>
+	</target>
+
+</project>
+

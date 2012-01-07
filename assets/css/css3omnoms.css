@@ -1,0 +1,33 @@
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.alignright {
+    text-align: right;
+}
+
+.alignleft {
+    text-align: left;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.nowrap {
+    white-space: nowrap;
+}

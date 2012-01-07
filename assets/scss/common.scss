@@ -1,0 +1,25 @@
+/**
+ * Common style definitions
+ * @author Ando Roots
+**/
+
+// Color constants
+$white: #FFF;
+$black: #000;
+
+
+.hidden {
+    display: none;
+}
+
+@mixin opaque($amount: .7) {
+        zoom: 1;
+        filter: alpha(opacity=$amount*100);
+        opacity: $amount;
+}
+
+@mixin box-shadow($color: #ABABAB, $a: 1px, $b: 1px, $c: 6px) {
+    -webkit-box-shadow: $a $b $c $color;
+    -moz-box-shadow: $a $b $c $color;
+    box-shadow: $a $b $c $color;
+}

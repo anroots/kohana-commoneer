@@ -1,0 +1,23 @@
+/* Bootstrap overrides */
+form input[type=text],
+form input[type=password],
+form input[type=submit],
+form textarea,
+form select,
+form .uneditable-input {
+    min-width: 60px;
+    width: auto;
+}
+
+form textarea {
+    font-size: 16px;
+}
+
+
+form fieldset input {
+    margin-bottom: 10px !important;
+}
+
+ul {
+    list-style: none;
+}
