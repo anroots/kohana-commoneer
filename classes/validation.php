@@ -2,7 +2,7 @@
 /**
  * Commonly used validation functions
  * @package Commoneer
- * @category Helpers
+ * @category Security
  * @author Ando Roots
  * @since 1.0
  */
