@@ -1,11 +1,12 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
 /**
- * Assets class config
+ * Assets class configuration file
+ *
  * @since 1.0
  * @package Commoneer
  * @subpackage Assets
- * @category Base
+ * @category dd
  * @author Ando Roots 2011
  * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -38,17 +39,14 @@ return array(
 	 * These paths will be searched for the assets you include
 	 * **/
 	'assets_paths' => array(
-		Assets::CSS => array(
+		Assets::STYLE => array(
 			'assets/css/',
 			'assets/shared/css/',
 		),
-		ASSETS::SCRIPT => array(
+		Assets::SCRIPT => array(
 			'assets/js/', // Project specific
 			'assets/shared/js/', // Shared is symlink to resource repository
 		),
-		ASSETS::STYLE => array(
-			'assets/less/',
-		)
 	),
 
 	/**
@@ -57,13 +55,11 @@ return array(
 	 * Syntax: alias (what you use to include the asset) => path (relative to the DOCROOT, no file extension
 	 */
 	'known_assets' => array(
-		Assets::CSS => array(
 
-		),
-		ASSETS::SCRIPT => array(
+		Assets::SCRIPT => array(
 			// Example: 'tablesorter' => 'assets/js/libs/tablesorter-1.min'
 		),
-		ASSETS::STYLE => array(
+		Assets::STYLE => array(
 
 		)
 	),
@@ -79,10 +75,10 @@ return array(
 	'presets' => array(
 
 		/*'preset1' => array(
-			Assets::CSS => array(
+			Assets::STYLE => array(
 				'tablesorter'
 			),
-			ASSETS::SCRIPT => array(
+			Assets::SCRIPT => array(
 				'tablesorter'
 			),
 		)*/

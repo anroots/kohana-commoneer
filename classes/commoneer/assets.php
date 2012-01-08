@@ -16,11 +16,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 {
 
 	/**
-	 * File extensions
+	 * @deprecated, use STYLE
 	 */
 	const CSS = 'css';
+
 	const SCRIPT = 'js';
-	const STYLE = 'less';
+	const STYLE = 'css';
 
 	/**
 	 * Known asset types as an array
@@ -125,6 +126,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 *
 	 * @since 1.0
 	 * @static
+	 * @deprecated Since 1.4, use use_style instead
 	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
 	 * @return Commoneer_Assets
 	 */
@@ -208,12 +210,13 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 			// Add HTML for including the asset
 			switch ($type) {
 				case Assets::STYLE:
-					$this->_assets[$type][$file] = '<link rel="stylesheet/less" type="text/css" href="' . URL::base() . $path . '">';
+					$this->_assets[$type][$file] = HTML::style($path);
 					break;
 				case  Assets::SCRIPT:
 					$this->_assets[$type][$file] = HTML::script($path);
 					break;
 				case Assets::CSS:
+					// @deprecated
 					$this->_assets[$type][$file] = HTML::style($path);
 					break;
 			}
