@@ -1,0 +1,3 @@
+[submodule "3.2/modules/commoneer-1.4"]
+	path = 3.2/modules/commoneer-1.4
+	url = git@github.com:anroots/kohana-commoneer.git
