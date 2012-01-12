@@ -62,7 +62,7 @@ class Date extends Kohana_Date
 			$date = date('Y-m-d H:i:s', $date);
 		}
 
-		return date((bool)$include_time ? 'Y-m-d H:i:s' : 'Y-m-d', strtotime($date));
+		return date($include_time ? 'Y-m-d H:i:s' : 'Y-m-d', strtotime($date));
 	}
 
 
