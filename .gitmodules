@@ -1,6 +1,6 @@
 [submodule "3.2/modules/commoneer-1.4"]
 	path = 3.2/modules/commoneer-1.4
-	url = git@github.com:anroots/kohana-commoneer.git
+	url = git://github.com/anroots/kohana-commoneer.git
 [submodule "3.2/modules/kohana-email/vendor/swiftmailer"]
 	path = 3.2/modules/kohana-email/vendor/swiftmailer
 	url = git://github.com/swiftmailer/swiftmailer.git
