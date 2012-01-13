@@ -99,7 +99,6 @@
 	<target name="phpunit" description="Run unit tests with PHPUnit">
 		<exec dir="${basedir}/application" executable="phpunit" failonerror="true">
 			<arg value="--configuration=tests/phpunit.xml"/>
-			<arg value="tests/model"/>
 		</exec>
 	</target>
 
