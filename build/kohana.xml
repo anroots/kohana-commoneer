@@ -97,7 +97,7 @@
 
 	<!-- PHPUnit tests - must be called manually from the master build file -->
 	<target name="phpunit" description="Run unit tests with PHPUnit">
-		<exec dir="application" executable="phpunit" failonerror="true">
+		<exec dir="${basedir}/application" executable="phpunit" failonerror="true">
 			<arg value="--configuration=tests/phpunit.xml"/>
 			<arg value="tests/model"/>
 		</exec>
