@@ -4,3 +4,6 @@
 [submodule "3.2/modules/kohana-email/vendor/swiftmailer"]
 	path = 3.2/modules/kohana-email/vendor/swiftmailer
 	url = git://github.com/swiftmailer/swiftmailer.git
+[submodule "3.2/modules/yaml/vendor/symfony-yaml"]
+	path = 3.2/modules/yaml/vendor/symfony-yaml
+	url = git://github.com/fabpot/yaml.git
