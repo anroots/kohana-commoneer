@@ -44,5 +44,20 @@ class Input
 		return empty($input) && $input !== 0 && $input !== '0' ? NULL : $input;
 	}
 
-
+	/**
+	 * Convert a string to a boolean value
+	 *
+	 * Works on other data types as well
+	 *
+	 * @since 1.4
+	 * @param mixed $input An input string that will be cast to a boolean value
+	 * @param bool $default The default value for when $input is empty
+	 * @return bool
+	**/
+	public static function str2bool($input, $default = FALSE) {
+		if (empty($input)) {
+			return $default;
+		}
+		return (bool) $input;
+	}
 }

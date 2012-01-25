@@ -1,16 +1,16 @@
 Commoneer Version 1.4 Release Candidate
 =======================================
 
-Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
-The module extends several Kohana's built-in classes, providing additional functions and behaviour.
+Commoneer provides commonly used helpers and extensible classes that the author saw fit to add to Kohana.
+The module extends several Kohana's built-in classes, providing additional functionality and behaviour.
 
-The module strongly reflects my developing style and might not me suitable for everyone.
+The module strongly reflects my developing style and might not be suitable for everyone.
 
 Core Philosophy
 ---------------
 
 One should be able to do more with less code, thereby strong convention over configuration approach is taken. Controllers are smart enough to find their own views and assets.
-Extendable classes lay out the groundwork for common operations such as delete and find_all.
+Extensible classes lay out the groundwork for common operations such as delete and find_all for modules.
 
 Included Classes
 ----------------
@@ -65,4 +65,4 @@ The master always holds the latest working version and previous and next version
 Documentation
 =============
 
-Minimal Kohana Userguide documentation is provided as well as Phpdoc style comments.
+Kohana Userguide documentation is provided as well as Phpdoc style comments. Activate the userguide module and navigate to http://localhost/your-kohana-path/guide.
