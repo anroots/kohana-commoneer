@@ -6,3 +6,5 @@ v1.4
 * Date::mysql_date() now treats empty input as time() (previous behaviour was to return null)
 * Assets auto including just got smarter, realizing there exist such things as controller directorys
 * Input::str2bool static function
+* Added default auth controller + view for quick login pages
+* Added config/app.php

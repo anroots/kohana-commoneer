@@ -36,6 +36,10 @@ Extended Helpers
 * Arr
 * Validation - recursively display (ORM) error messages
 
+Dependencies
+=============
+
+In addition to the default bundled modules (database, ORM, auth...), the Commoneer module also uses the Notify module by kaltar: https://github.com/kaltar/Notify
 
 Install
 =======

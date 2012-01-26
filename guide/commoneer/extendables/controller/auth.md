@@ -1,39 +1,9 @@
-# The AJAX Controller
+# The Auth Controller
 
-Extend the `Controller_Ajax` to inherit useful resources for handling AJAX queries.
-The Ajax controller extends `Commoneer_Controller_Template`.
+Use this controller when you need a login page. Place an empty controller anywhere in your controller folder (where your routes reach it) and make it extend the `Commoneer_Controller_Auth` class.
 
-# Example controller
+The result is a Twitter Bootstrap styled login form (you can override the design by creating a file called `application/views/templates/public/auth.php` or by modifying the `$template` property of the extending class).
 
-    class Controller_Post extends Controller_Ajax
-	{
-		// Require login
-		public function before()
-		{
-			$this->require_login(TRUE);
-			parent::before();
-		}
+The controller displays login form via its `index` action, logs the user out via the `logout` action and tries authentication by receiving POST data to the `login` action.
 
-		// Make a new post (this is an endpoint to an AJAX query)
-		public function action_make() {
-
-			// Do something with the incoming data
-			Model_Post::make($this->request->post());
-
-			// Echo the AJAX response and exit. The output from this will be as follows:
-			// {"status":200,"response":'New post saved!'}
-			$this->respond(parent::STATUS_OK, __('New post saved!'));
-		}
-	}
-
-# Behaviour
-
-`$this->respond()` has two formats, the main one takes a single associative array as an input and echoes the corresponding JSON output.
-There's also a shorthand: status constant (see the API documentation) as the first and a message for the 2nd parameter.
-
-The output usually includes 2 "mandatory" fields: _status_ and _response_. That behaviour can be disabled by setting `$this->_bare = TRUE;`.
-
-# Invocation Examples
-	$this->respond(parent::STATUS_ERROR, 'Something went wrong!');
-
-	$this->respond(array('status' => parent::STATUS_UNAUTHORIZED, 'action_performed' => 'post');
+Redirects are controlled via the `$dash` and `_login_url` properties.

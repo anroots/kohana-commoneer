@@ -1,4 +1,4 @@
-Commoneer Version 1.3 (Dec 17 2011)
+Commoneer Version 1.4 (Jan 26 2012)
 =======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
@@ -21,6 +21,8 @@ No need to write if statements to your master template file when all you have to
 to your controller action and the script gets included.
 
 **Controller_Template** - Adds convention over configuration automatic view detection and convenience attributes
+
+**Commoneer_Controller_Auth** - Adding a login page to your project couldn't be easier
 
 **Controller_Ajax** - Call $this->respond($data); and have JSON output out of the box
 
