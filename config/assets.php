@@ -57,10 +57,11 @@ return array(
 	'known_assets' => array(
 
 		Assets::SCRIPT => array(
-			 'tablesorter' => 'assets/js/libs/tablesorter-1.min'
+			'tablesorter' => 'assets/js/libs/tablesorter-1.min',
+			'ui' => 'assets/shared/js/libs/jquery-ui-1.8.16.min',
 		),
 		Assets::STYLE => array(
-
+			'ui' => 'assets/shared/css/aristo/jquery-ui-1.8.7.custom',
 		)
 	),
 
@@ -69,19 +70,21 @@ return array(
 	 *
 	 * Syntax: alias => array('first_include', 'second_include')
 	 * Includes must be known assets (defined above)
+	 * Each preset is identified by name and contains a list of predefined assets
+	 *
 	 *
 	 * @since 1.4
 	 */
 	'presets' => array(
 
-		/*'preset1' => array(
+		'ui' => array(
 			Assets::STYLE => array(
-				'tablesorter'
+				'ui'
 			),
 			Assets::SCRIPT => array(
-				'tablesorter'
+				'ui'
 			),
-		)*/
+		)
 	)
 );
 

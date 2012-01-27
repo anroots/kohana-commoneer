@@ -7,7 +7,7 @@
  * @author Ando Roots 2012
  * @since 1.4
  */
-class HTML extends Kohana_HTML
+class Commoneer_Helper_HTML extends Kohana_HTML
 {
 
 	/**
