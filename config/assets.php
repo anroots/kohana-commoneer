@@ -57,7 +57,7 @@ return array(
 	'known_assets' => array(
 
 		Assets::SCRIPT => array(
-			// Example: 'tablesorter' => 'assets/js/libs/tablesorter-1.min'
+			 'tablesorter' => 'assets/js/libs/tablesorter-1.min'
 		),
 		Assets::STYLE => array(
 

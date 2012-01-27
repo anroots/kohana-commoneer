@@ -10,3 +10,6 @@ define('SUPPRESS_REQUEST', TRUE);
 
 require('../../../index.php');
 
+if (!method_exists(Request::current(), 'is_ajax')) {
+    Request::$current = Request::factory('');
+}

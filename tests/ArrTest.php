@@ -12,8 +12,8 @@ class ArrTest extends Kohana_Unittest_TestCase
         $this->assertTrue(Arr::check_keys($input, array(), TRUE));
 
         // Test return false
-        $this->assertFalse(Arr::check_keys($input, array('sd')));
-        $this->assertFalse(Arr::check_keys($input, array('n', 'r', 't')));
+        $this->assertFalse(Arr::check_keys($input, array('sd'), FALSE));
+        $this->assertFalse(Arr::check_keys($input, array('n', 'r', 't'), FALSE));
 
 
         $this->assertTrue(Arr::check_keys($input, array('n')));
