@@ -6,6 +6,8 @@ The module extends several Kohana's built-in classes, providing additional funct
 
 The module strongly reflects my developing style and might not be suitable for everyone.
 
+See http://anroots.github.com/kohana-commoneer/ for additional information.
+
 Core Philosophy
 ---------------
 
