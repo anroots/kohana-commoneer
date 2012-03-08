@@ -7,6 +7,6 @@
  * @author Ando Roots 2012
  * @since 1.4
  */
-class HTML extends Commoneer_Helper_HTML
+class HTML extends Commoneer_HTML
 {
 }
