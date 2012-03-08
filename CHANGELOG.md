@@ -8,3 +8,4 @@ v1.4
 * Input::str2bool static function
 * Added default auth controller + view for quick login pages
 * Added config/app.php
+* Changed class names/inheritance to better reflect the HMVC pattern

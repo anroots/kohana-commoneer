@@ -1,4 +1,4 @@
-Commoneer Version 1.4 Release Candidate
+Commoneer Version 1.4 (08 March 2012)
 =======================================
 
 Commoneer provides commonly used helpers and extensible classes that the author saw fit to add to Kohana.
