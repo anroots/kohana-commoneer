@@ -103,7 +103,7 @@
 
 			<div class="clearfix"></div>
 
-			<input type="submit" class="btn large primary" name="login" value="<?=__('Login')?>"/>
+			<input type="submit" class="btn btn-large btn-primary" name="login" value="<?=__('Login')?>"/>
 
 			<div class="clearfix"></div>
 
