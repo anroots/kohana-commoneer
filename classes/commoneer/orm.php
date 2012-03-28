@@ -108,13 +108,12 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	 */
 	public function delete($force = FALSE)
 	{
-
 		// The deleted column does not exist, we have no choice
 		if (!$this->_is_deletable || !array_key_exists('deleted', $this->table_columns())) {
 			return parent::delete();
 		}
 
-		// Can not delete what isn't there...
+			// Can not delete what isn't there...
 		if (!$this->loaded()) {
 			return FALSE;
 		}
@@ -123,6 +122,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 		try {
 			return $this->save();
 		} catch (ORM_Validation_Exception $e) {
+            Validation::show_errors($e);
 		}
 		return FALSE;
 	}
@@ -138,7 +138,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	public function find_all()
 	{
 		if ($this->_is_deletable && $this->_has_deleted) {
-			$this->where(Inflector::singular($this->table_name()).'.deleted', '=', 0);
+			$this->where('deleted', '=', 0);
 		}
 		return parent::find_all();
 	}
