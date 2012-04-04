@@ -84,6 +84,9 @@ abstract class Commoneer_ORM extends Kohana_ORM
 					case 'limit':
 						$this->limit($value);
 						break;
+					case 'offset':
+						$this->offset($value);
+						break;
 					default:
 						$this->where($key, '=', $value);
 				}
