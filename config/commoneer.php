@@ -2,10 +2,10 @@
 
 /**
  * Commoneer config
+ *
  * @package Commoneer
  * @author Ando Roots <anroots@itcollege.ee>
  * @since 1.0
- * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
 return array(
 

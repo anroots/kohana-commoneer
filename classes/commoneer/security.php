@@ -4,7 +4,7 @@
  *
  * @package Commoneer
  * @category Security
- * @author Ando Roots
+ * @author Ando Roots <anroots@itcollege.ee>
  * @since 1.0
  */
 class Commoneer_Security extends Kohana_Security {

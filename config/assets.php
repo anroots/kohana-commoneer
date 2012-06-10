@@ -8,7 +8,6 @@
  * @subpackage Assets
  * @category dd
  * @author Ando Roots <anroots@itcollege.ee>
- * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
 return array(
 

@@ -9,7 +9,6 @@
  * @since 1.0
  * @package Commoneer
  * @author Ando Roots <anroots@itcollege.ee>
- * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
 class Commoneer_Assets implements Commoneer_Assets_Interface {
 

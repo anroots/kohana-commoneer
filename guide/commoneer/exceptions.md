@@ -18,7 +18,7 @@ You can have Commoneer override the default error handler in a production enviro
 	 * Override applies only in a non-development environment
 	 *
 	 * @see Kohana::$environment
-	 * @author Ando Roots
+	 * @author Ando Roots <anroots@itcollege.ee>
 	 * @package Commoneer
 	 * @subpackage Exception
 	 * @since 1.3
