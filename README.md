@@ -20,7 +20,7 @@ Included Classes
 **Assets** - Dynamic inclusion of stylesheets and scripts on as-needed basis.
 No need to write if statements to your master template file when all you have to do is add
     Assets::use_script('tablesorter')
-to your controller action and the script gets included.
+to your controller action and the script gets included. The output is automatically minified.
 
 **Controller_Template** - Adds convention over configuration automatic view detection and convenience attributes
 
@@ -41,7 +41,9 @@ Extended Helpers
 Dependencies
 =============
 
-In addition to the default bundled modules (database, ORM, auth...), the Commoneer module also uses the Notify module by kaltar: https://github.com/kaltar/Notify
+* Default Kohana modules (Database, ORM...)
+* Notify module by kaltar: https://github.com/kaltar/Notify
+* Minify: https://github.com/mrclay/minify
 
 Install
 =======

@@ -1,4 +1,4 @@
-Commoneer Version 1.4 (08 March 2012)
+Commoneer Version 2.0 WIP
 =======================================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
