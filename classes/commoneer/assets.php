@@ -9,6 +9,7 @@
  * @example Assets::preset('jquery-ui');
  * @example Assets::use_script('custom_script')->use_style('custom_style')->render();
  * @since 1.0
+ * @uses Minify, http://code.google.com/p/minify/
  * @package Commoneer
  * @author Ando Roots <anroots@itcollege.ee>
  */
@@ -37,16 +38,20 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	protected static $_assets_types = array(Commoneer_Assets::SCRIPT, Commoneer_Assets::STYLE);
 
 	/**
+	 * @var string The min directory (of Minify)
+	 */
+	public static $min_dir = 'min';
+
+	/**
 	 * Singleton pattern, store instance
 	 *
 	 * @var Commoneer_Assets
 	 */
 	protected static $_instance;
 
-
 	/**
-	 * Holds the HTML of included files
-	 * Syntax: array(type => array(alias => HTML))
+	 * Holds the URI paths of included files
+	 * Syntax: array(type => array(alias => path))
 	 *
 	 * @var array
 	 */
@@ -201,10 +206,10 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 			// Add HTML for including the asset
 			switch ($type) {
 				case Assets::STYLE:
-					$this->_assets[$type][$file] = HTML::style($path);
+					$this->_assets[$type][$file] = $path;
 					break;
 				case  Assets::SCRIPT:
-					$this->_assets[$type][$file] = HTML::script($path);
+					$this->_assets[$type][$file] = $path;
 					break;
 			}
 		}
@@ -253,7 +258,21 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 		// Render
 		if (! empty($this->_assets[$type])) {
-			$html = implode("\n", $this->_assets[$type]);
+
+			// Implode all assets of $type into a CSV list
+			$paths = implode(",", $this->_assets[$type]);
+
+			// Get the full URI for those assets, piping it throught Minify
+			$uri = $this->_get_min_uri($paths);
+
+			// Get a HTML include tag for the assets
+			if ($type === self::SCRIPT) {
+				$html = '<script type="text/javascript" src="'.$uri.'"></script>';
+			} else {
+				$html = '<link rel="stylesheet" type="text/css" href="'.$uri.'" />';
+			}
+
+			// Reset stack
 			$this->_assets[$type] = array();
 		}
 		return $html;
@@ -326,6 +345,19 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		}
 		Log::instance()->write(Kohana_Log::ERROR, 'Tried to load asset "'.$file.'", but got error 404.');
 		return FALSE;
+	}
+
+	/**
+	 * Get full URI for the Minify script, with $paths as arguments
+	 *
+	 * @param string $paths A CSV list of asset paths
+	 * @since 2.0
+	 * @return string Full URI for $paths
+	 */
+	private function _get_min_uri($paths)
+	{
+		$uri = URL::base('http').self::$min_dir.'/b='.trim(URL::base(), '/').'&f='.$paths;
+		return $uri;
 	}
 
 }

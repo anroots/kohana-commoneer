@@ -5,6 +5,8 @@
 * Date::mysql_date accepts DateTime and throws InvalidArgumentException
 * Added I18n helper
 * Removed the concept of $filters and $execute from ORM::get()
+* Removed deprecated ::CSS references from the Assets class, the class now throws InvalidArgumentExceptions instead of ExceptionSarcasm
+* Assets class now uses Minify by default.
 
 1.4
 =====
