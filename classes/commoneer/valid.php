@@ -7,8 +7,8 @@
  * @author Ando Roots
  * @since 1.4
  */
-class Commoneer_Valid extends Kohana_Valid
-{
+class Commoneer_Valid extends Kohana_Valid {
+
 	/**
 	 * Check whether a string is not negative
 	 *

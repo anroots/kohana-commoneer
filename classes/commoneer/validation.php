@@ -7,8 +7,7 @@
  * @author Ando Roots
  * @since 1.0
  */
-class Commoneer_Validation extends Kohana_Validation
-{
+class Commoneer_Validation extends Kohana_Validation {
 
 	/**
 	 * Displays validation exceptions
@@ -29,7 +28,7 @@ class Commoneer_Validation extends Kohana_Validation
 		if (is_object($e)) {
 			$e = $e->errors('validation');
 		}
-		if (!empty($e) && is_array($e)) {
+		if (! empty($e) && is_array($e)) {
 			foreach ($e as $error) {
 				Notify::msg($error, 'error');
 			}

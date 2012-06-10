@@ -1,18 +1,16 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Commoneer ORM extension
- * 
+ *
  * @since 1.1
  * @throws Exception_Not_Allowed
  * @package Commoneer
  * @author Ando Roots
  */
-abstract class Commoneer_ORM extends Kohana_ORM
-{
+abstract class Commoneer_ORM extends Kohana_ORM {
 
 	/**
 	 * Specify the allowed input filters for Commoneer_ORM::get()
-	 *
 	 * Attributes NOT in the array will be ignored.
 	 * Set to FALSE to disable
 	 *
@@ -27,8 +25,8 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	 * If TRUE and the table has a deleted column, treats entities with deleted=1 as nonexistent
 	 */
 	protected $_is_deletable = FALSE;
-	
-	
+
+
 	/**
 	 * @var bool Whether or not the current model has 'deleted' column
 	 * @since 1.2
@@ -61,21 +59,21 @@ abstract class Commoneer_ORM extends Kohana_ORM
 		}
 
 		// We don't want deleted rows!
-		if ($this->_is_deletable && $this->_has_deleted && !isset($filters['deleted'])) {
+		if ($this->_is_deletable && $this->_has_deleted && ! isset($filters['deleted'])) {
 			$this->where('deleted', '=', 0);
 		}
 
 		// Get a single row by ID
 		if (is_numeric($filters)) {
 			return $this->where('id', '=', $filters)
-					->find();
+				->find();
 
 			// Get all rows that match input filters
 		} elseif (is_array($filters)) {
 			foreach ($filters as $key => $value) {
 
 				// Filters must be explicitly allowed
-				if ($this->_allowed_filters !== FALSE && !in_array($key, $this->_allowed_filters)) {
+				if ($this->_allowed_filters !== FALSE && ! in_array($key, $this->_allowed_filters)) {
 					throw new Exception_Not_Allowed();
 				}
 
@@ -95,13 +93,12 @@ abstract class Commoneer_ORM extends Kohana_ORM
 
 		// Return an executed query or $this with filters applied
 		return $execute ? $this->order_by('id', 'desc')
-				->find_all() : $this;
+			->find_all() : $this;
 	}
 
 
 	/**
 	 * Safe delete of a record
-	 *
 	 * Override the ORM::delete function since we usually
 	 * don't want to permanently destroy data
 	 *
@@ -112,12 +109,12 @@ abstract class Commoneer_ORM extends Kohana_ORM
 	public function delete($force = FALSE)
 	{
 		// The deleted column does not exist, we have no choice
-		if (!$this->_is_deletable || !array_key_exists('deleted', $this->table_columns())) {
+		if (! $this->_is_deletable || ! array_key_exists('deleted', $this->table_columns())) {
 			return parent::delete();
 		}
 
-			// Can not delete what isn't there...
-		if (!$this->loaded()) {
+		// Can not delete what isn't there...
+		if (! $this->loaded()) {
 			return FALSE;
 		}
 
@@ -125,7 +122,7 @@ abstract class Commoneer_ORM extends Kohana_ORM
 		try {
 			return $this->save();
 		} catch (ORM_Validation_Exception $e) {
-            Validation::show_errors($e);
+			Validation::show_errors($e);
 		}
 		return FALSE;
 	}
@@ -133,8 +130,8 @@ abstract class Commoneer_ORM extends Kohana_ORM
 
 	/**
 	 * Find all matching rows
-	 *
 	 * This override adds deleted checking
+	 *
 	 * @since 1.2
 	 * @return void
 	 */

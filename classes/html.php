@@ -1,12 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Commonly used HTML helpers
- *
- * @package Commoneer
- * @category Helpers
- * @author Ando Roots 2012
- * @since 1.4
+ * Extends Kohana's built-in class with Commoneer extras.
+ * You can override this class to provide your own functionality.
+ * Create a new file in APPPATH/classes/html.php and extend either
+ * Kohana_HTML or Commoneer_HTML
  */
-class HTML extends Commoneer_HTML
-{
+class HTML extends Commoneer_HTML {
+
 }

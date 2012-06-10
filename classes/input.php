@@ -1,14 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Input filtering functions
- *
- * Used for filtering any kind of user data
- *
- * @package Commoneer
- * @category Helpers
- * @author Ando Roots
- * @since 1.0
+ * Extends Kohana's built-in class with Commoneer extras.
+ * You can override this class to provide your own functionality.
+ * Create a new file in APPPATH/classes/input.php and extend either
+ * Kohana_Input or Commoneer_Input
  */
-class Input extends Commoneer_Input
-{
+class Input extends Commoneer_Input {
+
 }

@@ -7,6 +7,6 @@
  * @author Ando Roots
  * @since 1.0
  */
-class Date extends Commoneer_Date
-{
+class Date extends Commoneer_Date {
+
 }

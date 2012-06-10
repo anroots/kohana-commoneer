@@ -8,8 +8,7 @@
  * @author Ando Roots
  * @since 1.0
  */
-class Commoneer_Date extends Kohana_Date
-{
+class Commoneer_Date extends Kohana_Date {
 
 	/**
 	 * Load date format initial config
@@ -41,7 +40,6 @@ class Commoneer_Date extends Kohana_Date
 
 	/**
 	 * Converts input date to MYSQL format
-	 *
 	 * Numeric input will be treated as time from UNIX_EPOCH
 	 *
 	 * @example: Date::mysql_date(31.12.2001 00:00:06, FALSE) == '2011-12-31'
@@ -56,8 +54,8 @@ class Commoneer_Date extends Kohana_Date
 			$date = time();
 		}
 
-		if (!strtotime($date)) { // Assume date is a timestamp
-			if (!is_numeric($date)) { // Malformed string!
+		if (! strtotime($date)) { // Assume date is a timestamp
+			if (! is_numeric($date)) { // Malformed string!
 				return NULL;
 			}
 			$date = date('Y-m-d H:i:s', $date);
@@ -69,7 +67,6 @@ class Commoneer_Date extends Kohana_Date
 
 	/**
 	 * Returns the localized version of a date
-	 *
 	 * Set your local date format in the Commoneer config file
 	 * or by dynamically modifying the static format variables
 	 *
@@ -86,20 +83,20 @@ class Commoneer_Date extends Kohana_Date
 	{
 		if (is_numeric($date) && $date > 1) {
 			// Timestamp given, do nothing
-		} elseif (is_string($date) && !empty($date)) {
+		} elseif (is_string($date) && ! empty($date)) {
 			$date = strtotime($date);
 		} else { // Default: time()
 			$date = time();
 		}
 
-		return date((bool)$include_time ? Date::$_format_long : Date::$_format_short, $date);
+		return date((bool) $include_time ? Date::$_format_long : Date::$_format_short, $date);
 	}
 
 
 	/**
 	 * Check if the start date is smaller than the end date
-	 *
 	 * Useful in validation rules
+	 *
 	 * @since 1.0
 	 * @param string $start Any date string or timestamp value
 	 * @param string $end Any date string or timestamp value
@@ -108,17 +105,17 @@ class Commoneer_Date extends Kohana_Date
 	public static function date_smaller_than($start, $end)
 	{
 		if (
-			(!is_numeric($start) && !is_string($start))
-			|| (!is_numeric($end) && !is_string($end))
+			(! is_numeric($start) && ! is_string($start))
+			|| (! is_numeric($end) && ! is_string($end))
 		) {
 			return FALSE;
 		}
 
 		// Converts input to timestamps if needed
-		if (!$ts1 = strtotime($start)) {
+		if (! $ts1 = strtotime($start)) {
 			$ts1 = $start;
 		}
-		if (!$ts2 = strtotime($end)) {
+		if (! $ts2 = strtotime($end)) {
 			$ts2 = $end;
 		}
 
@@ -128,8 +125,8 @@ class Commoneer_Date extends Kohana_Date
 
 	/**
 	 * Check if the input date is above the allowed limit
-	 *
 	 * Used for checking for format errors where PHP usually uses the EPOCH
+	 *
 	 * @since 1.0
 	 * @static
 	 * @param string $date Any valid date string
@@ -144,6 +141,6 @@ class Commoneer_Date extends Kohana_Date
 		$date = strtotime($date);
 
 		// If year is smaller than $min, it's probably invalid
-		return !empty($date) && $date > $min;
+		return ! empty($date) && $date > $min;
 	}
 }

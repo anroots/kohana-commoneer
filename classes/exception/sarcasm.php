@@ -6,24 +6,23 @@
  * @package Commoneer
  * @subpackage Exception
  */
-class Exception_Sarcasm extends Commoneer_Exception
-{
+class Exception_Sarcasm extends Commoneer_Exception {
 
-    /**
-     * @var int Sarcasm error code
-     */
-    protected $_code = 666;
+	/**
+	 * @var int Sarcasm error code
+	 */
+	protected $_code = 666;
 
-    /**
-     * Construct a new Exception_Sarcasm
-     *
-     * @param string $message
-     * @param array $variables
-     * @param int $code
-     */
-    public function __construct($message = 'Oh? Did you honestly just try to do that?', array $variables = array(), $code = 666)
-    {
-        parent::__construct($message, $variables, $code);
-    }
+	/**
+	 * Construct a new Exception_Sarcasm
+	 *
+	 * @param string $message
+	 * @param array $variables
+	 * @param int $code
+	 */
+	public function __construct($message = 'Oh? Did you honestly just try to do that?', array $variables = array(), $code = 666)
+	{
+		parent::__construct($message, $variables, $code);
+	}
 
 }

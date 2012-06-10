@@ -5,10 +5,9 @@
  * @since 1.2
  * @package Commoneer
  * @category Controller
- * @author Ando Roots 2011
+ * @author Ando Roots <anroots@itcollege.ee>
  */
-interface Controller_Interface_Crud
-{
+interface Controller_Interface_Crud {
 
 	/**
 	 * @abstract
@@ -18,6 +17,7 @@ interface Controller_Interface_Crud
 
 	/**
 	 * Also contains action_create
+	 *
 	 * @abstract
 	 * @return void
 	 */

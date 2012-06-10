@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Override Kohana's default Exception handler with Commoneer's
- *
  * Override applies only in a non-development environment
  *
  * @see Kohana::$environment
@@ -10,8 +9,8 @@
  * @subpackage Exception
  * @since 1.3
  */
-class Commoneer_Exception extends Kohana_Kohana_Exception
-{
+class Commoneer_Exception extends Kohana_Kohana_Exception {
+
 	/**
 	 * Overrides Kohana's Exception handler
 	 *
@@ -24,12 +23,13 @@ class Commoneer_Exception extends Kohana_Kohana_Exception
 		if (Kohana::$environment === Kohana::DEVELOPMENT) {
 			parent::handler($e); // Use Kohana's exception handler on DEVELOPMENT
 		}
-		else
-		{
+		else {
 			try // Output the error page
 			{
 				Kohana::$log->add(Log::ERROR, parent::text($e));
-				die(View::factory('commoneer/exception', array('message' => $e->message, 'code' => $e->code)));
+				die(View::factory('commoneer/exception', array('message' => $e->message,
+				                                               'code'    => $e->code
+				)));
 			}
 			catch (Exception $e) // Only the message if there's no view
 			{

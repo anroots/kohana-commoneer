@@ -2,18 +2,16 @@
 
 /**
  * Handles the inclusion of static assets such as css and js files.
- *
  * This class makes it simple to use stylesheets and scrips on as-needed basis
  * so you don't have to include everything in your template, always.
  *
  * @example Assets::use_script('tablesorter'); echo Assets::render();
  * @since 1.0
  * @package Commoneer
- * @author Ando Roots 2011
+ * @author Ando Roots <anroots@itcollege.ee>
  * @copyright GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
  */
-class Commoneer_Assets implements Commoneer_Assets_Interface
-{
+class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 	/**
 	 * @deprecated, use STYLE
@@ -33,6 +31,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Singleton pattern, store instance
+	 *
 	 * @var Commoneer_Assets
 	 */
 	protected static $_instance;
@@ -41,6 +40,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	/**
 	 * Holds the HTML of included files
 	 * Syntax: array(type => array(alias => HTML))
+	 *
 	 * @var array
 	 */
 	protected $_assets = array();
@@ -48,6 +48,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Class config, loaded on construct
+	 *
 	 * @var \Kohana_Config_Group|object
 	 */
 	private $_config;
@@ -66,6 +67,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Can't clone!
+	 *
 	 * @return object
 	 */
 	public function __clone()
@@ -139,7 +141,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Include a preset
-	 *
 	 * Presets are groups of assets defined in the config file preset subsection
 	 *
 	 * @throws Exception_Sarcasm
@@ -154,12 +155,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	{
 		$presets = Assets::instance()->_config->get('presets');
 
-		if (!is_array($aliases)) {
+		if (! is_array($aliases)) {
 			$aliases = array($aliases);
 		}
 
 		foreach ($aliases as $alias) {
-			if (!array_key_exists($alias, $presets)) {
+			if (! array_key_exists($alias, $presets)) {
 				throw new Exception_Sarcasm("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
 			}
 
@@ -179,7 +180,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Add HTML of the appropriate type to the load que
-	 *
 	 * Example: _add_resource(Assets::STYLE, 'common.less')
 	 * would add <style type...> to be included in the HEAD
 	 *
@@ -196,14 +196,14 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 			return;
 		}
 
-		if (!is_array($names)) {
+		if (! is_array($names)) {
 			$names = array($names);
 		}
 
 		// Add every specified file to the load que
 		foreach ($names as $file) {
 			$path = $this->_find_file($type, $file);
-			if (!$path) {
+			if (! $path) {
 				continue;
 			}
 
@@ -237,7 +237,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Return asset HTML includes
-	 *
 	 * ...and clear the include que
 	 *
 	 * @throws Exception_Sarcasm
@@ -247,7 +246,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 */
 	private function _render($type = NULL)
 	{
-		if (!in_array($type, Commoneer_Assets::known())) {
+		if (! in_array($type, Commoneer_Assets::known())) {
 			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
 		}
 
@@ -255,17 +254,18 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 		// Auto include matching controller/action resource files
 		if ($this->_config->auto_include) {
-			$file = (Request::current()->directory() ? Request::current()->directory() . DIRECTORY_SEPARATOR : NULL) . Request::current()->controller() . DIRECTORY_SEPARATOR . Request::current()->action();
+			$file = (Request::current()->directory() ? Request::current()->directory().DIRECTORY_SEPARATOR :
+				NULL).Request::current()->controller().DIRECTORY_SEPARATOR.Request::current()->action();
 			$this->_add_resource($type, $file);
 		}
 
 		// Nothing to render
-		if (empty($this->_assets) || !array_key_exists($type, $this->_assets)) {
+		if (empty($this->_assets) || ! array_key_exists($type, $this->_assets)) {
 			return NULL;
 		}
 
 		// Render
-		if (!empty($this->_assets[$type])) {
+		if (! empty($this->_assets[$type])) {
 			$html = implode("\n", $this->_assets[$type]);
 			$this->_assets[$type] = array();
 		}
@@ -291,8 +291,8 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Output all included assets as HTML style/script tags
-	 *
 	 * Clears the matching asset que when done.
+	 *
 	 * @since 1.0
 	 * @param bool|string $type Render only a specific type of assets. Defaults to all
 	 * @static
@@ -306,7 +306,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 
 	/**
 	 * Try to locate an asset file
-	 *
 	 * Look for the predefined assets first
 	 * Search in all defined assets paths
 	 *
@@ -318,27 +317,27 @@ class Commoneer_Assets implements Commoneer_Assets_Interface
 	 */
 	private function _find_file($type, $file)
 	{
-		if (!in_array($type, Commoneer_Assets::known())) {
+		if (! in_array($type, Commoneer_Assets::known())) {
 			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
 		}
 
 		// If the file is an alias to a known asset, get it's path from the config file
 		if (array_key_exists($type, $this->_config->assets_paths)) {
 			if (array_key_exists($file, $this->_config->known_assets[$type])) {
-				return $this->_config->assets_url . $this->_config->known_assets[$type][$file] . '.' . $type;
+				return $this->_config->assets_url.$this->_config->known_assets[$type][$file].'.'.$type;
 			}
 		}
 		// The file isn't predefined, search for it in all predefined asset folders
-		if (array_key_exists($type, $this->_config->assets_paths) && !empty($this->_config->assets_paths[$type])) {
+		if (array_key_exists($type, $this->_config->assets_paths) && ! empty($this->_config->assets_paths[$type])) {
 			foreach ($this->_config->assets_paths[$type] as $path) {
-				$file_path = $path . $file . '.' . $type;
-				if (file_exists(DOCROOT . $file_path)) {
-					return $this->_config->assets_url . $file_path;
+				$file_path = $path.$file.'.'.$type;
+				if (file_exists(DOCROOT.$file_path)) {
+					return $this->_config->assets_url.$file_path;
 				}
 			}
 
 		}
-		Log::instance()->write(Kohana_Log::ERROR, 'Tried to load asset "' . $file . '", but got error 404.');
+		Log::instance()->write(Kohana_Log::ERROR, 'Tried to load asset "'.$file.'", but got error 404.');
 		return FALSE;
 	}
 

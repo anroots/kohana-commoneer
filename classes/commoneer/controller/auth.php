@@ -6,10 +6,9 @@
  * @abstract
  * @package Commoneer
  * @category Controller
- * @author Ando Roots 2011
+ * @author Ando Roots <anroots@itcollege.ee>
  */
-class Commoneer_Controller_Auth extends Commoneer_Controller_Template
-{
+class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 
 	/**
 	 * @var string The template for the login view
@@ -53,6 +52,7 @@ class Commoneer_Controller_Auth extends Commoneer_Controller_Template
 	 */
 	public function action_logout()
 	{
+
 		Auth::instance()->logout();
 		$this->request->redirect($this->_login_url);
 	}
