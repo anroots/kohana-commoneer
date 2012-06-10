@@ -11,7 +11,7 @@ class Exception_Sarcasm extends Commoneer_Exception {
 	/**
 	 * @var int Sarcasm error code
 	 */
-	protected $_code = 666;
+	const CODE = 666;
 
 	/**
 	 * Construct a new Exception_Sarcasm
@@ -20,7 +20,8 @@ class Exception_Sarcasm extends Commoneer_Exception {
 	 * @param array $variables
 	 * @param int $code
 	 */
-	public function __construct($message = 'Oh? Did you honestly just try to do that?', array $variables = array(), $code = 666)
+	public function __construct($message = 'Oh? Did you honestly just try to do that?', array $variables = array(),
+	                            $code = self::CODE)
 	{
 		parent::__construct($message, $variables, $code);
 	}
