@@ -67,6 +67,8 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 	/**
 	 * Load config once, on construction
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	protected function __construct()
 	{
@@ -225,6 +227,14 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 				continue;
 			}
 
+			if ($this->_config->debug) {
+				Kohana::$log->add(Log::DEBUG, 'Adding asset of type ":type", name: :name, path: :path', array(
+					':type' => $type,
+					':name' => $file,
+					':path' => $path
+				));
+			}
+
 			// Add HTML for including the asset
 			switch ($type) {
 				case Assets::STYLE:
@@ -283,6 +293,10 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 			// Implode all assets of $type into a CSV list
 			$paths = implode(",", $this->_assets[$type]);
+
+			if ($this->_config->debug) {
+				Kohana::$log->add(Log::DEBUG, 'Rendering the following assets: :list', array(':list'=> $paths));
+			}
 
 			// Get the full URI for those assets, piping it throught Minify
 			$uri = $this->_get_min_uri($paths);
@@ -365,6 +379,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 			}
 
 		}
+
 		Log::instance()->write(Kohana_Log::ERROR, 'Tried to load asset "'.$file.'", but got error 404.');
 		return FALSE;
 	}

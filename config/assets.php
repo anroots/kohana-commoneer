@@ -18,6 +18,13 @@ return array(
 	'assets_url'     => NULL,
 
 	/**
+	 * Debug mode, logs info to Kohana log files
+	 *
+	 * @since 2.0
+	 */
+	'debug'          => FALSE,
+
+	/**
 	 * Automatically search for (and include) a matching resource file for
 	 * the current controller/action
 	 * For action_dog() of the controller Controller_Pet
