@@ -103,7 +103,7 @@ class Commoneer_Date extends Kohana_Date {
 	 * @see Date::set_format()
 	 * @see Date::$_format_long
 	 * @see Date::$_format_short
-	 * @param string $date Date string in any format, timestamp or empty for time()
+	 * @param string|null|DateTime|int $date Date string in any format, timestamp, DateTime or empty for time()
 	 * @param bool $include_time Whether to return the long format
 	 * @return string Date string in the specified localized format
 	 */
@@ -111,13 +111,15 @@ class Commoneer_Date extends Kohana_Date {
 	{
 		if (is_numeric($date) && $date > 1) {
 			// Timestamp given, do nothing
-		} elseif (is_string($date) && ! empty($date)) {
+		} elseif (is_string($date) && ! empty($date)) { // Date string
 			$date = strtotime($date);
+		} elseif ($date instanceof DateTime) {
+			$date = $date->format(DateTime::ISO8601);
 		} else { // Default: time()
 			$date = time();
 		}
 
-		return date((bool) $include_time ? Date::$_format_long : Date::$_format_short, $date);
+		return date($include_time ? self::$_format_long : self::$_format_short, $date);
 	}
 
 
@@ -126,12 +128,20 @@ class Commoneer_Date extends Kohana_Date {
 	 * Useful in validation rules
 	 *
 	 * @since 1.0
-	 * @param string $start Any date string or timestamp value
-	 * @param string $end Any date string or timestamp value
+	 * @param string|int|DateTime $start Any date string or timestamp value
+	 * @param string|int|DateTime $end Any date string or timestamp value
 	 * @return bool TRUE if $start is strictly smaller than $end
 	 */
 	public static function date_smaller_than($start, $end)
 	{
+		if ($start instanceof DateTime) {
+			$start = $start->getTimestamp();
+		}
+
+		if ($end instanceof DateTime) {
+			$end = $end->getTimestamp();
+		}
+
 		if (
 			(! is_numeric($start) && ! is_string($start))
 			|| (! is_numeric($end) && ! is_string($end))
@@ -157,16 +167,23 @@ class Commoneer_Date extends Kohana_Date {
 	 *
 	 * @since 1.0
 	 * @static
-	 * @param string $date Any valid date string
+	 * @param string|int|DateTime $date Any valid date string
 	 * @param int $min Timestamp of the minimum accepted time, defaults to 1990-ish
 	 * @return bool TRUE If the input time is greater than the minimum
 	 */
 	public static function realistic_date($date, $min = NULL)
 	{
+		if ($date instanceof DateTime) {
+			$date = $date->getTimestamp();
+		}
+
 		if ($min === NULL) {
 			$min = 631152000; // 1990
 		}
-		$date = strtotime($date);
+
+		if (! is_numeric($date)) {
+			$date = strtotime($date);
+		}
 
 		// If year is smaller than $min, it's probably invalid
 		return ! empty($date) && $date > $min;

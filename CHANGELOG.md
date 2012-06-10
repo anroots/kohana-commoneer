@@ -2,6 +2,7 @@
 =====
 * Overhaul of the API-s
 * HTML::breadcrumbs can now accept undefined number of crumbs in one call, using func_get_args
+* Date::mysql_date accepts DateTime and throws InvalidArgumentException
 
 1.4
 =====
