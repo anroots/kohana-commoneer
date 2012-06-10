@@ -2,10 +2,12 @@
 
 /**
  * Handles the inclusion of static assets such as css and js files.
- * This class makes it simple to use stylesheets and scrips on as-needed basis
+ * This class makes it easy to use stylesheets and scrips on as-needed basis
  * so you don't have to include everything in your template, always.
  *
  * @example Assets::use_script('tablesorter'); echo Assets::render();
+ * @example Assets::preset('jquery-ui');
+ * @example Assets::use_script('custom_script')->use_style('custom_style')->render();
  * @since 1.0
  * @package Commoneer
  * @author Ando Roots <anroots@itcollege.ee>
@@ -13,11 +15,17 @@
 class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 	/**
-	 * @deprecated, use STYLE
+	 * Javascript file extension
+	 *
+	 * @since 1.0
 	 */
-	const CSS = 'css';
-
 	const SCRIPT = 'js';
+
+	/**
+	 * CSS file extension
+	 *
+	 * @since 1.0
+	 */
 	const STYLE = 'css';
 
 	/**
@@ -26,7 +34,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 * @since 1.4
 	 * @var array
 	 */
-	protected static $_assets_types = array(Commoneer_Assets::CSS, Commoneer_Assets::SCRIPT, Commoneer_Assets::STYLE);
+	protected static $_assets_types = array(Commoneer_Assets::SCRIPT, Commoneer_Assets::STYLE);
 
 	/**
 	 * Singleton pattern, store instance
@@ -102,7 +110,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 */
 	public static function use_script($names)
 	{
-		Assets::instance()->_add_resource(Assets::SCRIPT, $names);
+		Assets::instance()->_add_resource(self::SCRIPT, $names);
 		return Assets::instance();
 	}
 
@@ -123,31 +131,15 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 
 	/**
-	 * Add a new css file to the current request
-	 *
-	 * @since 1.0
-	 * @static
-	 * @deprecated Since 1.4, use use_style instead
-	 * @param string|array $names Either a predefined alias or a path. Can also be an array of aliases/paths
-	 * @return Commoneer_Assets
-	 */
-	public static function use_css($names)
-	{
-		Assets::instance()->_add_resource(Assets::CSS, $names);
-		return Assets::instance();
-	}
-
-
-	/**
 	 * Include a preset
 	 * Presets are groups of assets defined in the config file preset subsection
 	 *
-	 * @throws Exception_Sarcasm
 	 * @example Assets::instance()->preset('dates');
 	 * @example Assets::instance()->preset(array('jquery-ui', 'dates'));
 	 * @since 1.4
 	 * @static
 	 * @param string|array $aliases The alias(es) of the preset
+	 * @throws Exception_Config
 	 * @return Commoneer_Assets
 	 */
 	public static function preset($aliases)
@@ -160,7 +152,8 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 		foreach ($aliases as $alias) {
 			if (! array_key_exists($alias, $presets)) {
-				throw new Exception_Sarcasm("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets configuration file.", array(':name' => $alias));
+				throw new Exception_Config("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets
+				configuration file.", array(':name' => $alias));
 			}
 
 			// Loop over all types of assets (style,script) in the preset
@@ -182,9 +175,8 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 * Example: _add_resource(Assets::STYLE, 'common.less')
 	 * would add <style type...> to be included in the HEAD
 	 *
-	 * @throws Exception_Sarcasm
 	 * @since 1.0
-	 * @param const $type One of the asset types (STYLE, SCRIPT, CSS)
+	 * @param string $type One of the asset types (STYLE, SCRIPT)
 	 * @param mixed $names A single file or an array of file paths relative to the asset root
 	 * @return void
 	 */
@@ -214,10 +206,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 				case  Assets::SCRIPT:
 					$this->_assets[$type][$file] = HTML::script($path);
 					break;
-				case Assets::CSS:
-					// @deprecated
-					$this->_assets[$type][$file] = HTML::style($path);
-					break;
 			}
 		}
 	}
@@ -238,7 +226,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 * Return asset HTML includes
 	 * ...and clear the include que
 	 *
-	 * @throws Exception_Sarcasm
+	 * @throws InvalidArgumentException
 	 * @since 1.0
 	 * @param string $type The type of assets to render (script/style)
 	 * @return string|null HTML markup
@@ -246,7 +234,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	private function _render($type = NULL)
 	{
 		if (! in_array($type, Commoneer_Assets::known())) {
-			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
+			throw new InvalidArgumentException(__('Unknown asset type for inclusion: :name', array(':name' => $type)));
 		}
 
 		$html = NULL;
@@ -308,7 +296,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 * Look for the predefined assets first
 	 * Search in all defined assets paths
 	 *
-	 * @throws Exception_Sarcasm
+	 * @throws InvalidArgumentException
 	 * @since 1.0
 	 * @param string $type Asset type
 	 * @param string $file Partial file path
@@ -317,7 +305,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	private function _find_file($type, $file)
 	{
 		if (! in_array($type, Commoneer_Assets::known())) {
-			throw new Exception_Sarcasm('Unknown asset type for inclusion: :name', array(':name' => $type));
+			throw new InvalidArgumentException(__('Unknown asset type for inclusion: :name', array(':name' => $type)));
 		}
 
 		// If the file is an alias to a known asset, get it's path from the config file
