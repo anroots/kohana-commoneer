@@ -2,9 +2,9 @@
 /**
  * Extends Kohana's built-in class with Commoneer extras.
  * You can override this class to provide your own functionality.
- * Create a new file in APPPATH/classes/date.php and extend either
- * Kohana_Date or Commoneer_Date
+ * Create a new file in APPPATH/classes/i18n.php and extend either
+ * Kohana_I18n or Commoneer_I18n
  */
-class Date extends Commoneer_Date {
+class I18n extends Commoneer_I18n {
 
 }

@@ -15,7 +15,7 @@ class Commoneer_Validation extends Kohana_Validation {
 	 * @since 1.0
 	 * @static
 	 * @uses Notify::msg A flash-message module https://github.com/kaltar/Notify
-	 * @param $e ORM_Validation_Exception array
+	 * @param $e array ORM_Validation_Exception array
 	 * @return void
 	 */
 	public static function show_errors($e)
