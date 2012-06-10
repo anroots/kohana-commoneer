@@ -5,10 +5,41 @@
  *
  * @package Commoneer
  * @category Helpers
- * @author Ando Roots
+ * @author Ando Roots <anroots@itcollege.ee>
  * @since 1.0
  */
 class Commoneer_Date extends Kohana_Date {
+
+	/**
+	 * Timestamp format of MYSQL, with time
+	 *
+	 * @since 2.0
+	 * @see self::mysql_date()
+	 */
+	const MYSQL_LONG = 'Y-m-d H:i:s';
+
+	/**
+	 * Timestamp format of MYSQL, date only
+	 *
+	 * @since 2.0
+	 * @see self::mysql_date()
+	 */
+	const MYSQL_SHORT = 'Y-m-d';
+
+	/**
+	 * @var string Long date format string
+	 * @see Date::localized_date
+	 * @static
+	 */
+	public static $_format_long = 'd.m.Y H:i';
+
+	/**
+	 * @var string Short date format string
+	 * @see Date::localized_date
+	 * @static
+	 */
+	public static $_format_short = 'd.m.Y';
+
 
 	/**
 	 * Load date format initial config
@@ -19,23 +50,17 @@ class Commoneer_Date extends Kohana_Date {
 	public function __construct()
 	{
 		parent::construct();
-		Date::$_format_long = Kohana::$config->load('commoneer.date_format_long');
-		Date::$_format_short = Kohana::$config->load('commoneer.date_format_short');
+
+		$format_long = Kohana::$config->load('commoneer.date_format_long');
+		if (! empty($format_long)) {
+			self::$_format_long = $format_long;
+		}
+
+		$format_short = Kohana::$config->load('commoneer.date_format_short');
+		if (! empty($format_short)) {
+			self::$_format_short = $format_short;
+		}
 	}
-
-	/**
-	 * @var string Date format string
-	 * @see Date::localized_date
-	 * @static
-	 */
-	public static $_format_long = 'd.m.Y H:i';
-
-	/**
-	 * @var string Date format string
-	 * @see Date::localized_date
-	 * @static
-	 */
-	public static $_format_short = 'd.m.Y';
 
 
 	/**
@@ -44,24 +69,27 @@ class Commoneer_Date extends Kohana_Date {
 	 *
 	 * @example: Date::mysql_date(31.12.2001 00:00:06, FALSE) == '2011-12-31'
 	 * @static
-	 * @param string|int|null $date Any valid date string
+	 * @param string|int|null|DateTime $date Any valid date string. Leave empty to use NOW().
 	 * @param bool $include_time If true, return H:i:s also
-	 * @return null|string NULL on format error, MYSQL format date otherwise
+	 * @throws InvalidArgumentException
+	 * @return string MYSQL format date
 	 */
 	public static function mysql_date($date = NULL, $include_time = TRUE)
 	{
 		if (empty($date)) {
 			$date = time();
+		} elseif ($date instanceof DateTime) {
+			return $date->format($include_time ? self::MYSQL_LONG : self::MYSQL_SHORT);
 		}
 
 		if (! strtotime($date)) { // Assume date is a timestamp
 			if (! is_numeric($date)) { // Malformed string!
-				return NULL;
+				throw new InvalidArgumentException('Invalid $date, "'.(string) $date.'"!');
 			}
-			$date = date('Y-m-d H:i:s', $date);
+			$date = date(self::MYSQL_LONG, $date);
 		}
 
-		return date($include_time ? 'Y-m-d H:i:s' : 'Y-m-d', strtotime($date));
+		return date($include_time ? self::MYSQL_LONG : self::MYSQL_SHORT, strtotime($date));
 	}
 
 
