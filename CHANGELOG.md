@@ -7,6 +7,8 @@
 * Removed the concept of $filters and $execute from ORM::get()
 * Removed deprecated ::CSS references from the Assets class, the class now throws InvalidArgumentExceptions instead of ExceptionSarcasm
 * Assets class now uses Minify by default.
+* Security::safe_string is deprecated, replaced by URL::title
+* Assets class has a new always_include config option
 
 1.4
 =====

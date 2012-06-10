@@ -65,7 +65,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 */
 	private $_config;
 
-
 	/**
 	 * Load config once, on construction
 	 */
@@ -75,6 +74,29 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		if (Assets::$_instance === NULL) {
 			Assets::$_instance = $this;
 		}
+
+		// Load assets to always include
+		$always_include = Kohana::$config->load('assets.always_include');
+
+		if (is_array($always_include)) {
+
+			// Add each asset group to the list of includes
+			foreach ($always_include as $type => $list) {
+
+				switch ($type) {
+					case Assets::SCRIPT:
+						self::use_script($list);
+						break;
+					case Assets::STYLE:
+						self::use_style($list);
+						break;
+					default:
+						throw new InvalidArgumentException(__('Unknown asset type for inclusion: :name', array(':name' => $type)));
+						break;
+				}
+			}
+		}
+
 	}
 
 	/**
