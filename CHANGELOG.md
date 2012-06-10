@@ -4,6 +4,7 @@
 * HTML::breadcrumbs can now accept undefined number of crumbs in one call, using func_get_args
 * Date::mysql_date accepts DateTime and throws InvalidArgumentException
 * Added I18n helper
+* Removed the concept of $filters and $execute from ORM::get()
 
 1.4
 =====

@@ -10,14 +10,10 @@
 abstract class Commoneer_ORM extends Kohana_ORM {
 
 	/**
-	 * Specify the allowed input filters for Commoneer_ORM::get()
-	 * Attributes NOT in the array will be ignored.
-	 * Set to FALSE to disable
-	 *
-	 * @var array
-	 * @see Commoneer_ORM::get()
+	 * @var string The name of the column in the database that fills the role of the 'deleted' column
+	 * @since 2.0
 	 */
-	protected $_allowed_filters = FALSE;
+	protected $_deleted_column_name = 'deleted';
 
 	/**
 	 * @var bool Set to TRUE to enable automagical deleted column features
@@ -40,60 +36,34 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 	public function __construct($id = NULL)
 	{
 		parent::__construct($id);
-		$this->_has_deleted = array_key_exists('deleted', $this->table_columns());
+		$this->_has_deleted = array_key_exists($this->_deleted_column_name, $this->table_columns());
 	}
 
 	/**
-	 * Get a single or several ORM records, based on $filters
+	 * Get a single or several ORM records, without deleted rows
 	 *
 	 * @since 1.1
-	 * @throws Exception_Not_Allowed
-	 * @param mixed $filters Empty: find all, integer: find by ID, assoc. array: apply filters
-	 * @param bool $execute Whether to execute the query or only apply the filters
-	 * @return Database_Result|Haldaja_ORM|ORM
+	 * @param mixed $id Empty: find all, integer: find a single row by ID
+	 * @return Database_Result
 	 */
-	public function get($filters = NULL, $execute = TRUE)
+	public function get($id = NULL)
 	{
 		if ($this->loaded()) {
 			$this->clear();
 		}
 
 		// We don't want deleted rows!
-		if ($this->_is_deletable && $this->_has_deleted && ! isset($filters['deleted'])) {
-			$this->where('deleted', '=', 0);
+		if ($this->_is_deletable && $this->_has_deleted) {
+			$this->where($this->_deleted_column_name, '=', 0);
 		}
 
 		// Get a single row by ID
-		if (is_numeric($filters)) {
-			return $this->where('id', '=', $filters)
+		if (is_numeric($id)) {
+			return $this->where($this->_primary_key, '=', $id)
 				->find();
-
-			// Get all rows that match input filters
-		} elseif (is_array($filters)) {
-			foreach ($filters as $key => $value) {
-
-				// Filters must be explicitly allowed
-				if ($this->_allowed_filters !== FALSE && ! in_array($key, $this->_allowed_filters)) {
-					throw new Exception_Not_Allowed();
-				}
-
-				// Apply filters
-				switch ($key) {
-					case 'limit':
-						$this->limit($value);
-						break;
-					case 'offset':
-						$this->offset($value);
-						break;
-					default:
-						$this->where($key, '=', $value);
-				}
-			}
 		}
 
-		// Return an executed query or $this with filters applied
-		return $execute ? $this->order_by('id', 'desc')
-			->find_all() : $this;
+		return $this->find_all();
 	}
 
 
@@ -109,7 +79,7 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 	public function delete($force = FALSE)
 	{
 		// The deleted column does not exist, we have no choice
-		if (! $this->_is_deletable || ! array_key_exists('deleted', $this->table_columns())) {
+		if (! $this->_is_deletable || ! array_key_exists($this->_deleted_column_name, $this->table_columns())) {
 			return parent::delete();
 		}
 
@@ -118,7 +88,7 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 			return FALSE;
 		}
 
-		$this->deleted = 1;
+		$this->{$this->_deleted_column_name} = 1;
 		try {
 			return $this->save();
 		} catch (ORM_Validation_Exception $e) {
@@ -133,12 +103,12 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 	 * This override adds deleted checking
 	 *
 	 * @since 1.2
-	 * @return void
+	 * @return Database_Result
 	 */
 	public function find_all()
 	{
 		if ($this->_is_deletable && $this->_has_deleted) {
-			$this->where('deleted', '=', 0);
+			$this->where($this->_deleted_column_name, '=', 0);
 		}
 		return parent::find_all();
 	}
