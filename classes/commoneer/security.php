@@ -16,16 +16,11 @@ class Commoneer_Security extends Kohana_Security {
 	 * @since 1.0
 	 * @static
 	 * @param string $input Arbitrary string
+	 * @deprecated Since 2.0, identical to URL::title
 	 * @return string Cleaned input string
 	 */
 	public static function safe_string($input)
 	{
-
-		if (! empty($input)) {
-			$input = iconv("utf-8", "ascii//TRANSLIT", $input);
-			$input = strtolower(preg_replace('/[^a-zA-Z0-9-._]/', '', $input));
-		}
-		$input = str_replace(' ', '', $input);
-		return strtolower(trim($input));
+		return URL::title($input);
 	}
 }
