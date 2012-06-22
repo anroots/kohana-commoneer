@@ -4,7 +4,7 @@
  *
  * @package Commoneer
  * @category Security
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  * @since 1.0
  */
 class Commoneer_Validation extends Kohana_Validation {

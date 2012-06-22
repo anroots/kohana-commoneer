@@ -11,7 +11,7 @@
  * @since 1.0
  * @uses Minify, http://code.google.com/p/minify/
  * @package Commoneer
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  */
 class Commoneer_Assets implements Commoneer_Assets_Interface {
 
@@ -285,6 +285,11 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 		// Nothing to render
 		if (empty($this->_assets) || ! array_key_exists($type, $this->_assets)) {
+			if ($this->_config->debug) {
+				Kohana::$log->add(Log::DEBUG, 'Nothing to render for asset type :type!', array(
+					':type'=> $type
+				));
+			}
 			return NULL;
 		}
 
@@ -295,7 +300,12 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 			$paths = implode(",", $this->_assets[$type]);
 
 			if ($this->_config->debug) {
-				Kohana::$log->add(Log::DEBUG, 'Rendering the following assets: :list', array(':list'=> $paths));
+				Kohana::$log->add(Log::DEBUG, 'Rendering the following assets: :list. Controller: :controller,
+				Action: :action.', array(
+					':list'      => $paths,
+					':controller'=> Request::current()->controller(),
+					':action'    => Request::current()->action()
+				));
 			}
 
 			// Get the full URI for those assets, piping it throught Minify

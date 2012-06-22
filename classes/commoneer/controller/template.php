@@ -8,7 +8,7 @@
  * @since 1.1
  * @package Commoneer
  * @category Controller
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
 
  */
 abstract class Commoneer_Controller_Template extends Kohana_Controller_Template {

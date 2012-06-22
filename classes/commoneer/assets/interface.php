@@ -3,10 +3,9 @@
 /**
  * @since 1.0
  * @package Commoneer
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  */
 interface Commoneer_Assets_Interface {
-
 
 	/**
 	 * Que a new javascript file
@@ -48,7 +47,7 @@ interface Commoneer_Assets_Interface {
 	public static function instance();
 
 	/**
-	 * Output all qued files as HTML markup (used in template head)
+	 * Output all queued files as HTML markup (used in template head)
 	 *
 	 * @static
 	 * @abstract

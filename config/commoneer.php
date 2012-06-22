@@ -4,7 +4,7 @@
  * Commoneer config
  *
  * @package Commoneer
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  * @since 1.0
  */
 return array(

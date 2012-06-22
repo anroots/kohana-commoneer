@@ -6,7 +6,7 @@
  * @since 1.0
  * @package Commoneer
  * @subpackage Assets
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  */
 return array(
 

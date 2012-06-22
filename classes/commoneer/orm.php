@@ -5,7 +5,7 @@
  * @since 1.1
  * @throws Exception_Not_Allowed
  * @package Commoneer
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  */
 abstract class Commoneer_ORM extends Kohana_ORM {
 

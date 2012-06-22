@@ -5,7 +5,7 @@
  *
  * @package Commoneer
  * @category Helpers
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  * @since 1.0
  */
 class Commoneer_Input {

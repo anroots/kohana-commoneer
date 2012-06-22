@@ -6,5 +6,4 @@
  * Kohana_I18n or Commoneer_I18n
  */
 class I18n extends Commoneer_I18n {
-
 }

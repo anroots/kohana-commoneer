@@ -8,7 +8,7 @@
  * @abstract
  * @package Commoneer
  * @category Controller
- * @author Ando Roots <anroots@itcollege.ee>
+ * @author Ando Roots <ando@roots.ee>
  */
 abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template {
 
