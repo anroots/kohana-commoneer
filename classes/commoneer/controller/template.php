@@ -1,15 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
 /**
  * Main controller template
- * Adds common functionality such as convention-over-configuration templating,
+ *
+ * Adds common functionality such as convention-over-configuration views,
  * common attributes and functions
  *
  * @since 1.1
  * @package Commoneer
  * @category Controller
  * @author Ando Roots <ando@roots.ee>
-
  */
 abstract class Commoneer_Controller_Template extends Kohana_Controller_Template {
 
@@ -30,6 +29,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 	/**
 	 * Additional view path
+	 *
 	 * Will be appended after the default view folder path
 	 * Example: public for views/public
 	 *
@@ -70,7 +70,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 * Request::current()->param('id')
 	 *
 	 * @see Request::param()
-	 * @var Current resource ID
+	 * @var string Current resource ID
 	 */
 	public $id;
 
@@ -83,6 +83,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 	/**
 	 * Change login requirement for accessing the current controller
+	 *
 	 * Should be called before calling parent::before()
 	 *
 	 * @param bool $require TRUE if login is required for the current controller
@@ -115,6 +116,8 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 		$this->id = $this->request->param('id');
 		$this->param = $this->request->param('param');
+
+		$this->_login_url = Kohana::$config->load('auth.login_uri');
 
 		$this->_check_login();
 
@@ -160,5 +163,4 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 		}
 		parent::after();
 	}
-
 }
