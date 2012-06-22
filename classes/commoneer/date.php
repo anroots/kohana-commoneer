@@ -114,7 +114,7 @@ class Commoneer_Date extends Kohana_Date {
 		} elseif (is_string($date) && ! empty($date)) { // Date string
 			$date = strtotime($date);
 		} elseif ($date instanceof DateTime) {
-			$date = $date->format(DateTime::ISO8601);
+			$date = $date->getTimestamp();
 		} else { // Default: time()
 			$date = time();
 		}
