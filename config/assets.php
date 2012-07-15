@@ -23,7 +23,7 @@ return array(
 	 *
 	 * @since 2.0
 	 */
-	'min_base'       => 'assets/css',//trim(URL::base(), '/'),
+	'min_base'       => NULL,
 
 
 	/**
