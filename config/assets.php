@@ -17,6 +17,15 @@ return array(
 	 */
 	'assets_url'     => NULL,
 
+
+	/**
+	 * Base URL for the minify library (the &b= query param)
+	 *
+	 * @since 2.0
+	 */
+	'min_base'       => 'assets/css',//trim(URL::base(), '/'),
+
+
 	/**
 	 * Debug mode, logs info to Kohana log files
 	 *

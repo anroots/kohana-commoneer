@@ -403,7 +403,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 */
 	private function _get_min_uri($paths)
 	{
-		$uri = URL::base('http').self::$min_dir.'/b='.trim(URL::base(), '/').'&f='.$paths;
+		$uri = URL::base('http').self::$min_dir.'/b='.$this->_config->min_base.'&f='.$paths;
 		return $uri;
 	}
 

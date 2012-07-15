@@ -20,7 +20,8 @@ class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 	 */
 	public $dash = 'dash';
 
-	public function before(){
+	public function before()
+	{
 		$this->dash = Kohana::$config->load('auth.login_success_uri');
 		parent::before();
 	}
