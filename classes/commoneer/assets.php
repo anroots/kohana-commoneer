@@ -384,7 +384,13 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 			foreach ($this->_config->assets_paths[$type] as $path) {
 				$file_path = $path.$file.'.'.$type;
 				if (file_exists(DOCROOT.$file_path)) {
-					return $this->_config->assets_url.$file_path;
+
+					$file_path = $this->_config->assets_url.$file_path;
+					// Remove configured base_url from the path (for the minify module)
+					if ($this->_config->min_base !== NULL) {
+						return ltrim($file_path, $this->_config->min_base);
+					}
+					return $file_path;
 				}
 			}
 
