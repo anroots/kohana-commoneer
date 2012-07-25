@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Main controller template
- *
  * Adds common functionality such as convention-over-configuration views,
  * common attributes and functions
  *
@@ -26,10 +25,8 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 */
 	protected $_require_login = FALSE;
 
-
 	/**
 	 * Additional view path
-	 *
 	 * Will be appended after the default view folder path
 	 * Example: public for views/public
 	 *
@@ -44,7 +41,6 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 */
 	protected $_default_view_path = 'views';
 
-
 	/**
 	 * Alias to $this->template->content
 	 *
@@ -52,12 +48,24 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 */
 	public $content;
 
-
 	/**
 	 * @var string Redirect there when login is required, but user is not authenticated
 	 */
 	protected $_login_url = 'public';
 
+	/**
+	 * @var string The name of the controller's matching ORM model. This model will be auto-instanced and loaded with $this->id
+	 * @since 2.0
+	 */
+	protected $_orm_name;
+
+	/**
+	 * @var mixed ORM model associated with this controller
+	 * @example Controller_User would hold an instance of Model_User
+	 * @since 2.0
+	 * @see self::$_orm_name
+	 */
+	protected $_orm;
 
 	/**
 	 * Alias to $this->template->title
@@ -83,7 +91,6 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 	/**
 	 * Change login requirement for accessing the current controller
-	 *
 	 * Should be called before calling parent::before()
 	 *
 	 * @param bool $require TRUE if login is required for the current controller
@@ -121,6 +128,11 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 		$this->_check_login();
 
+		// Load associated ORM model
+		if ($this->_orm_name !== NULL) {
+			$this->_orm = ORM::factory($this->orm_name, $this->id);
+		}
+
 		/**
 		 * Assign all controllers and actions a default view - convention over configuration!
 		 * View files shall be named like so: APPPATH/views/CONTROLLER/ACTION.php
@@ -146,7 +158,6 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 				? View::factory($view_convention) : NULL;
 		}
 	}
-
 
 	/**
 	 * Assuming we have a config file app.php!
