@@ -94,7 +94,7 @@
 
 		<form action="" method="post" id="login-form" class="form-stacked">
 			<label for="user"><?=__('Username')?>:</label>
-			<input type="text" id="user" placeholder="Mihkel" maxlength="32" name="user" autofocus required/>
+			<input type="text" id="user" placeholder="..." maxlength="32" name="user" autofocus required/>
 
 			<div class="clearfix"></div>
 
