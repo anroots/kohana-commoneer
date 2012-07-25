@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 /**
- * Provides AJAX functionality to controllers
+ * Provides AJAX functionality to controllers.
  * Every response has a bare minimum of 2 attributes (unless specifically denied):
- * json.status, which is a numeric status code and json.response, containing any textual data
+ * json.status, which is a numeric status code and json.response, containing any (textual) data.
  *
  * @since 1.1
  * @abstract
@@ -66,7 +66,7 @@ abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template {
 	 * Output a JSON response
 	 *
 	 * @since 1.1
-	 * @param mixed $data Either an assoc array or status code
+	 * @param mixed $data Integer status code or response data
 	 * @param string $message The message to respond with, empty when not using the shorthand
 	 * @return void
 	 */
@@ -85,8 +85,8 @@ abstract class Commoneer_Controller_Ajax extends Commoneer_Controller_Template {
 				}
 
 			} else { // Shorthand: CODE, MESSAGE
-				$data = array('status'   => $data,
-				              'response' => $message
+				$data = array('status'   => is_int($data) ? $data : self::STATUS_OK,
+				              'response' => is_int($data) ? $message : $data
 				);
 			}
 		}
