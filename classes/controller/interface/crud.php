@@ -10,20 +10,28 @@
 interface Controller_Interface_Crud {
 
 	/**
-	 * @abstract
-	 * @return void
-	 */
-	public function action_read();
-
-	/**
-	 * Also contains action_create
+	 * Display a list of resources or details about a single resource
+	 * if <id> is set.
 	 *
+	 * @since 2.0
 	 * @abstract
 	 * @return void
 	 */
-	public function action_update();
+	public function action_index();
 
 	/**
+	 * Edit or create a (new) resource
+	 *
+	 * @since 2.0
+	 * @abstract
+	 * @return void
+	 */
+	public function action_edit();
+
+	/**
+	 * Delete the resource
+	 *
+	 * @since 2.0
 	 * @abstract
 	 * @return void
 	 */
