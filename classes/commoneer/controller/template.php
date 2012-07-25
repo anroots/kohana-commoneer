@@ -130,7 +130,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 
 		// Load associated ORM model
 		if ($this->_orm_name !== NULL) {
-			$this->_orm = ORM::factory($this->orm_name, $this->id);
+			$this->_orm = ORM::factory($this->_orm_name, $this->id);
 		}
 
 		/**
