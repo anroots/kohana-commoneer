@@ -157,6 +157,11 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 			$this->content = Kohana::find_file($this->_default_view_path, $view_convention)
 				? View::factory($view_convention) : NULL;
 		}
+
+		// Make the default ORM model accessible from the view
+		if (isset($this->content) && $this->_orm_name !== NULL && $this->_orm instanceof ORM) {
+			$this->content->{$this->_orm_name} = $this->_orm;
+		}
 	}
 
 	/**

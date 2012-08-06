@@ -3,7 +3,7 @@
 Comoneer includes an assets manager class that takes care of dynamically including static assets like jQuery plugins on only the pages you specify.
 The advantage of this is that you don't have to load all your CSS files/libraries on every page you load just to use it once or twice.
 
-The purpose of the Assets class is not to minify/combine asset files although this could be a further development goal.
+The assets class uses the Minify library by default since 2.0.
 
 The assets manager class accepts static calls to load script/style files and renders them in your template with `Assets::render()`. CSS and JavaScript file types are supported. LESS support was deprecated.
 

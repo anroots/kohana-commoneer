@@ -10,6 +10,10 @@
 * Assets class now uses Minify by default.
 * Security::safe_string is deprecated, replaced by URL::title
 * Assets class has a new always_include config option
+* The ORM model has a new method, `changed_log`
+* Controllers can now auto-load and make accessible from the view their associated models via a new class property, _orm_name
+
+(this list is not complete)
 
 1.4
 =====

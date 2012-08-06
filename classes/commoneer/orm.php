@@ -9,6 +9,13 @@
  */
 abstract class Commoneer_ORM extends Kohana_ORM {
 
+	protected $_created_column = array('column'=> 'created',
+	                                   'format'=> 'Y-m-d H:i:s'
+	);
+	protected $_updated_column = array('column'=> 'updated',
+	                                   'format'=> 'Y-m-d H:i:s'
+	);
+
 	/**
 	 * @var string The name of the column in the database that fills the role of the 'deleted' column
 	 * @since 2.0
@@ -125,4 +132,39 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 			)
 		);
 	}
+
+	/**
+	 * Return an array of changed properties with their old => new values.
+	 * Used in logging functions.
+	 *
+	 * @since 2.0
+	 * @param bool $text TRUE to get back HTML string instead of an array
+	 * @return array|string|null
+	 */
+	public function changed_log($text = TRUE)
+	{
+		if ($this->loaded() && count($this->changed())) {
+
+			$log = [];
+			$original = $this->original_values();
+
+			// Create a map of changed properties
+			foreach ($this->changed() as $property) {
+				$log[$property] = [$original[$property], $this->{$property}];
+			}
+
+			// Return HTML?
+			if ($text) {
+				$string = '<ul>';
+				foreach ($log as $key => $changes) {
+					$string .= '<li><strong>'.$key.'</strong>: '.$changes[0].' => '.$changes[1].'</li>';
+				}
+				return $string.'</ul>';
+			}
+
+			return $log;
+		}
+		return NULL;
+	}
+
 }

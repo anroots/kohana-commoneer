@@ -1,5 +1,5 @@
-Commoneer Version 2.0 WIP
-=======================================
+Commoneer Version 2.0
+=====================
 
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
 The module extends several Kohana's built-in classes, providing additional functions and behaviour.
@@ -57,4 +57,4 @@ Minimal Kohana Userguide documentation is provided as well as Phpdoc style comme
 
 View the latest version and be part of the community at [https://github.com/anroots/kohana-commoneer](https://github.com/anroots/kohana-commoneer)
 
-_Commoneer Kohana Module by Ando Roots 2011 ando+dev@roots.ee_
+_Commoneer Kohana Module by Ando Roots 2011 ando@sqroot.eu_

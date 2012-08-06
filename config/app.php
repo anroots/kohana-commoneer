@@ -11,17 +11,17 @@ return array(
 	/**
 	 * The title of the application. Think HTML <title>
 	 */
-	'title' => 'Mooditude - Track your mood',
+	'title' => 'Your application title',
 
 	/**
 	 * The description of the application. Think HTML <meta>
 	 */
-	'description' => 'Fast and usable mood tracker focused on the individual.',
+	'description' => 'Your application description.',
 
 	/**
 	 * The codename of the application
 	 */
-	'codename' => 'Mooditude',
+	'codename' => 'Project X',
 
 	/**
 	 * Current app version

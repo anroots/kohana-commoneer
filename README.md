@@ -1,5 +1,5 @@
-Commoneer Version 2.0 WIP
-=======================================
+Commoneer Version 2.0 (06 August 2012)
+======================
 
 Commoneer provides commonly used helpers and extensible classes that the author saw fit to add to Kohana.
 The module extends several Kohana's built-in classes, providing additional functionality and behaviour.

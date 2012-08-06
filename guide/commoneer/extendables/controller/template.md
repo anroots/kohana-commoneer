@@ -26,3 +26,7 @@ If login is required and the user is not logged in, (s)he will be redirected to 
 		}
 	}
 
+# ORM auto-loading
+
+Set `$_orm_name` value to the name of the ORM model and the controller automatically loads and assigns it to `$this->_orm`,
+additionally, the model is bount to `$this->template->content->{$_orm_name}`.

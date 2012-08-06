@@ -18,7 +18,7 @@ class Exception_Not_Allowed extends Commoneer_Exception {
 	 * @param array $variables
 	 * @param int $code
 	 */
-	public function __construct($message = 'Method \':name\' called with invalid parameters!', array $variables = array(),
+	public function __construct($message = 'You are not allowed to perform this action.', array $variables = array(),
 	                            $code = self::CODE)
 	{
 		$variables[':name'] = $this->get_calling_function_name();
