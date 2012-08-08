@@ -14,15 +14,12 @@ class Commoneer_Model_User extends Model_Auth_User {
 		],
 	];
 
-	/**
-	 * @var string Audit column, set to FALSE to disable.
-	 */
-	protected $_created_column = 'created';
-
-	/**
-	 * @var string Audit column, set to FALSE to disable.
-	 */
-	protected $_updated_column = 'updated';
+	protected $_created_column = array('column'=> 'created',
+	                                   'format'=> 'Y-m-d H:i:s'
+	);
+	protected $_updated_column = array('column'=> 'updated',
+	                                   'format'=> 'Y-m-d H:i:s'
+	);
 
 	/**
 	 * Do not access directly, use the instance() static function.
