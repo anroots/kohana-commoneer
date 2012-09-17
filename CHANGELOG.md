@@ -1,3 +1,8 @@
+2.0.1
+=====
+
+* Add ?r= to the query args when session timeout causes a redirect to the login controller.
+
 2.0
 =====
 

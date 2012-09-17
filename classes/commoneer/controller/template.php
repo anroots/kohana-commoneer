@@ -112,7 +112,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	{
 		// Redirect if not logged in
 		if ($this->_require_login && ! Auth::instance()->logged_in()) {
-			$this->request->redirect($this->_login_url);
+			$this->request->redirect($this->_get_login_url());
 		}
 	}
 
@@ -178,5 +178,13 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 			$this->template->content = $this->content;
 		}
 		parent::after();
+	}
+
+	/**
+	 * @return string URL to redirect to when login is required
+	 */
+	protected function _get_login_url()
+	{
+		return $this->_login_url.URL::query(array('r' => $this->request->uri()));
 	}
 }
