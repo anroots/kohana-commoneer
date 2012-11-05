@@ -2,6 +2,6 @@
 /**
  * @since 1.0
  */
-class Kohana_Exception extends Commoneer_Exception {
+class HTTP_Exception extends Commoneer_HTTP_Exception {
 
 }
