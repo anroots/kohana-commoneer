@@ -45,10 +45,6 @@
 		<blockquote><?=$message?></blockquote>
 		<? endif ?>
 
-		<p class="help-block">
-			<?=__("The error has been logged.")?>
-		</p>
-
 		<p>
 			<a href="<?=URL::base()?>"><?=__('Go to the home page')?></a>
 		</p>

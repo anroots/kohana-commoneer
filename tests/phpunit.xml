@@ -1,7 +1,0 @@
-<phpunit colors="true" bootstrap="test_bootstrap.php">
-    <testsuites>
-        <testsuite name="Model tests">
-            <directory>/var/www/sisuhaldus/application/tests/models/</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>

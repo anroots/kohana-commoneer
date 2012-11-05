@@ -7,6 +7,7 @@
 * Moved Input::not_equals to Valid class
 * Removed Commoneer_Security
 * Rename Input to Filter
+* Commoneer_Exception has been refactored to Commoneer_HTTP_Exception. Only HTTP exception handling is overriden.
 
 2.0.1
 =====
