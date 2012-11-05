@@ -1,3 +1,12 @@
+3.0.0
+=====
+
+* Built for PSR-0 compliance with Kohana 3.3
+* Renamed class files for PSR-0 compliance
+* Removed Commoneer_Validation
+* Removed Commoneer_Valid
+* Removed Commoneer_Security
+
 2.0.1
 =====
 
