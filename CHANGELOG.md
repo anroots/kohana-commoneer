@@ -4,8 +4,9 @@
 * Built for PSR-0 compliance with Kohana 3.3
 * Renamed class files for PSR-0 compliance
 * Removed Commoneer_Validation
-* Removed Commoneer_Valid
+* Moved Input::not_equals to Valid class
 * Removed Commoneer_Security
+* Rename Input to Filter
 
 2.0.1
 =====

@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * @since 2.0
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 class Commoneer_Model_Permission extends ORM {
 

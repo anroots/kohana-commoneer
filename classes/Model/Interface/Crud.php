@@ -5,7 +5,7 @@
  * @since 1.2
  * @package Commoneer
  * @category Model
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 interface Model_Interface_Crud {
 

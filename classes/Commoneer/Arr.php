@@ -4,7 +4,7 @@
  *
  * @package Commoneer
  * @category Helpers
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  * @since 1.0
  */
 class Commoneer_Arr extends Kohana_Arr {

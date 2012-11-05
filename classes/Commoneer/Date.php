@@ -5,7 +5,7 @@
  *
  * @package Commoneer
  * @category Helpers
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  * @since 1.0
  */
 class Commoneer_Date extends Kohana_Date {

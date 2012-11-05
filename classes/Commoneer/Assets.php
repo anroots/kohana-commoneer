@@ -11,7 +11,7 @@
  * @since 1.0
  * @uses Minify, http://code.google.com/p/minify/
  * @package Commoneer
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 class Commoneer_Assets implements Commoneer_Assets_Interface {
 

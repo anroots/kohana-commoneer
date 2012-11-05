@@ -4,7 +4,7 @@
  * Implements the singleton pattern for the currently logged in user.
  *
  * @since 2.0
- * @@author Ando Roots <ando@roots.ee>
+ * @@author Ando Roots <ando@sqroot.eu>
  */
 class Commoneer_Model_User extends Model_Auth_User {
 

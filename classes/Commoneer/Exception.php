@@ -4,7 +4,7 @@
  * Override applies only in a non-development environment
  *
  * @see Kohana::$environment
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  * @package Commoneer
  * @subpackage Exception
  * @since 1.3

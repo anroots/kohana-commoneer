@@ -2,7 +2,7 @@
 /**
  * 118n helpers
  *
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  * @since 2.0
  */
 class Commoneer_I18n extends Kohana_I18n {

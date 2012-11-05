@@ -6,7 +6,7 @@
  * @abstract
  * @package Commoneer
  * @category Controller
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 

@@ -4,7 +4,7 @@
  *
  * @package Commoneer
  * @category Helpers
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  * @since 1.4
  */
 class Commoneer_HTML extends Kohana_HTML {

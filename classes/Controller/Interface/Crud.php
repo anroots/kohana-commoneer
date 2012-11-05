@@ -5,7 +5,7 @@
  * @since 1.2
  * @package Commoneer
  * @category Controller
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 interface Controller_Interface_Crud {
 

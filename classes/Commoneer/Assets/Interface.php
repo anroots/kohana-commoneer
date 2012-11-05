@@ -3,7 +3,7 @@
 /**
  * @since 1.0
  * @package Commoneer
- * @author Ando Roots <ando@roots.ee>
+ * @author Ando Roots <ando@sqroot.eu>
  */
 interface Commoneer_Assets_Interface {
 
