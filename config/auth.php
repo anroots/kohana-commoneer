@@ -20,7 +20,7 @@ return array(
 	 *
 	 * @since 2.0
 	 **/
-	'logout_redirect_url' => URL::base('http').'public/auth',
+	'logout_redirect_uri' => URL::base('http').'public',
 
 	/**
 	 * URI to redirect to after successful login (without base URI)

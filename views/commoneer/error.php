@@ -41,7 +41,6 @@
 		</p>
 
 		<? if (! empty($message)): ?>
-		<h4><?=__('The server said:')?></h4>
 		<blockquote><?=$message?></blockquote>
 		<? endif ?>
 

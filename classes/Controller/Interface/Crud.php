@@ -29,6 +29,13 @@ interface Controller_Interface_Crud {
 	public function action_edit();
 
 	/**
+	 * View resource in read-only mode
+	 *
+	 * @return void
+	 */
+	public function action_view();
+
+	/**
 	 * Delete the resource
 	 *
 	 * @since 2.0

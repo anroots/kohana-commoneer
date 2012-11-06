@@ -1,60 +1,41 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Main controller template
- * Adds common functionality such as convention-over-configuration views,
- * common attributes and functions
+ * Adds common functionality such as auto-loaded convention-over-configuration views and shorthand view attributes.
  *
  * @since 1.1
  * @package Commoneer
  * @category Controller
  * @author Ando Roots <ando@sqroot.eu>
  */
-abstract class Commoneer_Controller_Template extends Kohana_Controller_Template {
+abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
+{
 
 	/**
 	 * Default template
 	 *
 	 * @var string
 	 */
-	public $template = 'templates/theme';
+	public $template = 'templates/default';
 
 	/**
-	 * Whether accessing the current controller requires login
+	 * Does accessing the current controller requires login
 	 *
 	 * @var bool
 	 */
-	protected $_require_login = FALSE;
-
-	/**
-	 * Additional view path
-	 * Will be appended after the default view folder path
-	 * Example: public for views/public
-	 *
-	 * @var string
-	 */
-	protected $_view_path = '';
-
-	/**
-	 * Default views folder
-	 *
-	 * @var string
-	 */
-	protected $_default_view_path = 'views';
+	protected $_require_login = false;
 
 	/**
 	 * Alias to $this->template->content
 	 *
-	 * @var
+	 * @var View
 	 */
 	public $content;
 
 	/**
-	 * @var string Redirect there when login is required, but user is not authenticated
-	 */
-	protected $_login_url = 'public';
-
-	/**
-	 * @var string The name of the controller's matching ORM model. This model will be auto-instanced and loaded with $this->id
+	 * @var string The name of the controller's matching ORM model.
+	 * This model will be auto-instanced and loaded with $this->id as the PK
+	 * The model name is auto-detected from the controller's class name
 	 * @since 2.0
 	 */
 	protected $_orm_name;
@@ -83,26 +64,6 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	public $id;
 
 	/**
-	 * Request::current()->param('param');
-	 *
-	 * @var string URI Param
-	 */
-	public $param;
-
-	/**
-	 * Change login requirement for accessing the current controller
-	 * Should be called before calling parent::before()
-	 *
-	 * @param bool $require TRUE if login is required for the current controller
-	 * @return void
-	 */
-	public function require_login($require = TRUE)
-	{
-		$this->_require_login = (bool) $require;
-	}
-
-
-	/**
 	 * Check login
 	 *
 	 * @since 1.2
@@ -112,7 +73,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	{
 		// Redirect if not logged in
 		if ($this->_require_login && ! Auth::instance()->logged_in()) {
-			$this->request->redirect($this->_get_login_url());
+			$this->redirect($this->_get_login_url());
 		}
 	}
 
@@ -122,46 +83,50 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 		parent::before();
 
 		$this->id = $this->request->param('id');
-		$this->param = $this->request->param('param');
-
-		$this->_login_url = Kohana::$config->load('auth.login_uri');
 
 		$this->_check_login();
 
-		// Load associated ORM model
-		if ($this->_orm_name !== NULL) {
-			$this->_orm = ORM::factory($this->_orm_name, $this->id);
-		}
+		$this->_load_orm();
 
-		/**
-		 * Assign all controllers and actions a default view - convention over configuration!
-		 * View files shall be named like so: APPPATH/views/CONTROLLER/ACTION.php
-		 * So controller "dash" action "index" will have the view APPPATH/views/dash/index
-		 **/
-
-		// DIRECTORY / CONTROLLER / ACTION
-		// Ignore dir if empty
-		$dir = $this->request->directory();
-
-		$dir = empty($dir) ? NULL : $dir.DIRECTORY_SEPARATOR;
-		$view_convention = $dir.$this->request->controller().DIRECTORY_SEPARATOR.$this->request->action();
-
-
-		// If view folder is not default append custom path to the view file path
-		if ($this->_view_path) {
-			$this->content = Kohana::find_file($this->_default_view_path.DIRECTORY_SEPARATOR.$this->_view_path, $view_convention)
-				? View::factory($this->_view_path.DIRECTORY_SEPARATOR.$view_convention) : NULL;
-
-		} else {
-			// Default view folder
-			$this->content = Kohana::find_file($this->_default_view_path, $view_convention)
-				? View::factory($view_convention) : NULL;
-		}
+		// Load view that matches with the current directory / controller / action
+		$this->_load_view();
 
 		// Make the default ORM model accessible from the view
-		if (isset($this->content) && $this->_orm_name !== NULL && $this->_orm instanceof ORM) {
+		if ($this->_orm instanceof ORM && $this->content instanceof View) {
 			$this->content->{$this->_orm_name} = $this->_orm;
 		}
+	}
+
+	/**
+	 * Load the ORM model
+	 */
+	private function _load_orm()
+	{
+		if ($this->_orm_name !== false) {
+			$this->_orm_name = $this->_get_orm_name();
+		}
+
+		// Load associated ORM model
+		if ($this->_orm_name !== false) {
+			$this->_orm = ORM::factory($this->_orm_name, $this->id);
+		}
+	}
+
+	/**
+	 * Load view for the current controller/action
+	 *
+	 * @since 3.0
+	 */
+	private function _load_view()
+	{
+		$dir = $this->request->directory();
+
+		$dir = empty($dir) ? null : $dir.DIRECTORY_SEPARATOR;
+		$view_path = $dir.$this->request->controller().DIRECTORY_SEPARATOR.$this->request->action();
+		$view_path = strtolower($view_path);
+
+		$this->content = Kohana::find_file('views', $view_path)
+			? View::factory($view_path) : null;
 	}
 
 	/**
@@ -171,12 +136,12 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 */
 	public function after()
 	{
-		if (! $this->request->is_ajax() && $this->template) {
-			// The default application title
-			$this->template->title = empty($this->title) && $this->title !== FALSE ? Kohana::$config->load('app.title') :
-				$this->title;
-			$this->template->content = $this->content;
+		if ($this->title !== false && empty($this->title)) {
+			$this->title = Kohana::$config->load('app.title');
 		}
+
+		$this->template->title = $this->title;
+		$this->template->content = $this->content;
 		parent::after();
 	}
 
@@ -185,6 +150,22 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template 
 	 */
 	protected function _get_login_url()
 	{
-		return $this->_login_url.URL::query(array('r' => $this->request->uri()));
+		return Kohana::$config->load('auth.uri').URL::query(array('r' => $this->request->uri()));
+	}
+
+
+	/**
+	 * Get the name of the ORM model that corresponds to the current controller.
+	 *
+	 * @example Controller_Company would get back 'company'
+	 * @return bool|string class name that can be fed to ORM::factory()
+	 */
+	private function _get_orm_name()
+	{
+		$controller_name = explode('Controller_', get_called_class(), 2)[1];
+		if (class_exists('Model_'.$controller_name)) {
+			return $controller_name;
+		}
+		return false;
 	}
 }

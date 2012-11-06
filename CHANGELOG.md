@@ -8,6 +8,9 @@
 * Removed Commoneer_Security
 * Rename Input to Filter
 * Commoneer_Exception has been refactored to Commoneer_HTTP_Exception. Only HTTP exception handling is overriden.
+* Overhaul Commoneer_Controller_Template API (and rename to Controller_Template)
+* Remove Controller_Ajax (should be replaced with a dedicated API module)
+* Add view action to Crud controller interface. Add Crud controller trait.
 
 2.0.1
 =====

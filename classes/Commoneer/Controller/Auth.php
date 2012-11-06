@@ -8,23 +8,12 @@
  * @category Controller
  * @author Ando Roots <ando@sqroot.eu>
  */
-class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
+class Commoneer_Controller_Auth extends Controller_Template {
 
 	/**
 	 * @var string The template for the login view
 	 */
-	public $template = 'templates/public/auth';
-
-	/**
-	 * @var string The URL to redirect to after successful authentication
-	 */
-	public $dash = 'dash';
-
-	public function before()
-	{
-		$this->dash = Kohana::$config->load('auth.login_success_uri');
-		parent::before();
-	}
+	public $template = 'templates/auth';
 
 	/**
 	 * Shows the login page and handles login
@@ -36,7 +25,7 @@ class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 	{
 		// Can't authenticate twice
 		if (Auth::instance()->logged_in()) {
-			$this->request->redirect('');
+			$this->redirect('');
 		}
 
 		// If the login form was posted...
@@ -44,13 +33,13 @@ class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 
 			// Try to login
 			if (Auth::instance()->login($this->request->post('user'), $this->request->post('pass'))) {
-				$this->request->redirect($this->dash);
+				$this->redirect(Kohana::$config->load('auth.login_success_uri'));
 			} else {
 				Notify::msg('Authentication failed!', 'error');
 			}
 
 			// Auth failed
-			$this->request->redirect($this->_login_url);
+			$this->redirect($this->_get_login_url());
 		}
 	}
 
@@ -62,6 +51,6 @@ class Commoneer_Controller_Auth extends Commoneer_Controller_Template {
 	public function action_logout()
 	{
 		Auth::instance()->logout();
-		$this->request->redirect(Kohana::$config->load('auth.logout_redirect_url'));
+		$this->redirect(Kohana::$config->load('auth.logout_redirect_uri'));
 	}
 }

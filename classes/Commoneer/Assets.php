@@ -413,5 +413,4 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		$uri = URL::base('http').self::$min_dir.'/'.$b.'f='.$paths;
 		return $uri;
 	}
-
 }
