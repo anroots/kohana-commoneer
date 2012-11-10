@@ -13,7 +13,7 @@
  * @package Commoneer
  * @author Ando Roots <ando@sqroot.eu>
  */
-class Commoneer_Assets implements Commoneer_Assets_Interface {
+class Commoneer_Assets {
 
 	/**
 	 * Javascript file extension
@@ -76,29 +76,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		if (Assets::$_instance === NULL) {
 			Assets::$_instance = $this;
 		}
-
-		// Load assets to always include
-		$always_include = Kohana::$config->load('assets.always_include');
-
-		if (is_array($always_include)) {
-
-			// Add each asset group to the list of includes
-			foreach ($always_include as $type => $list) {
-
-				switch ($type) {
-					case Assets::SCRIPT:
-						self::use_script($list);
-						break;
-					case Assets::STYLE:
-						self::use_style($list);
-						break;
-					default:
-						throw new InvalidArgumentException(__('Unknown asset type for inclusion: :name', array(':name' => $type)));
-						break;
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -168,7 +145,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 * @since 1.4
 	 * @static
 	 * @param string|array $aliases The alias(es) of the preset
-	 * @throws Exception_Config
+	 * @throws Kohana_Exception
 	 * @return Commoneer_Assets
 	 */
 	public static function preset($aliases)
@@ -181,7 +158,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 		foreach ($aliases as $alias) {
 			if (! array_key_exists($alias, $presets)) {
-				throw new Exception_Config("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets
+				throw new Kohana_Exception("Tried to load assets preset ':name', but it's not listed in the Commoneer Assets
 				configuration file.", array(':name' => $alias));
 			}
 
@@ -200,7 +177,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	}
 
 	/**
-	 * Add HTML of the appropriate type to the load que
+	 * Add HTML of the appropriate type to the load queue
 	 * Example: _add_resource(Assets::STYLE, 'common.less')
 	 * would add <style type...> to be included in the HEAD
 	 *
@@ -211,7 +188,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 	 */
 	private function _add_resource($type, $names)
 	{
-
 		if (empty($names)) {
 			return;
 		}
@@ -220,7 +196,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 			$names = array($names);
 		}
 
-		// Add every specified file to the load que
+		// Add every specified file to the load queue
 		foreach ($names as $file) {
 			$path = $this->_find_file($type, $file);
 			if (! $path) {
@@ -261,7 +237,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 	/**
 	 * Return asset HTML includes
-	 * ...and clear the include que
+	 * ...and clear the include queue
 	 *
 	 * @throws InvalidArgumentException
 	 * @since 1.0
@@ -280,6 +256,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		if ($this->_config->auto_include) {
 			$file = (Request::current()->directory() ? Request::current()->directory().DIRECTORY_SEPARATOR :
 				NULL).Request::current()->controller().DIRECTORY_SEPARATOR.Request::current()->action();
+			$file = strtolower($file);
 			$this->_add_resource($type, $file);
 		}
 
@@ -308,7 +285,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 				));
 			}
 
-			// Get the full URI for those assets, piping it throught Minify
+			// Get the full URI for those assets, piping it thought Minify
 			$uri = $this->_get_min_uri($paths);
 
 			// Get a HTML include tag for the assets
@@ -343,7 +320,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 
 	/**
 	 * Output all included assets as HTML style/script tags
-	 * Clears the matching asset que when done.
+	 * Clears the matching asset queue when done.
 	 *
 	 * @since 1.0
 	 * @param bool|string $type Render only a specific type of assets. Defaults to all
@@ -376,7 +353,7 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 		// If the file is an alias to a known asset, get it's path from the config file
 		if (array_key_exists($type, $this->_config->assets_paths)) {
 			if (array_key_exists($file, $this->_config->known_assets[$type])) {
-				return $this->_config->assets_url.$this->_config->known_assets[$type][$file].'.'.$type;
+				return $this->_config->known_assets[$type][$file].'.'.$type;
 			}
 		}
 		// The file isn't predefined, search for it in all predefined asset folders
@@ -385,7 +362,6 @@ class Commoneer_Assets implements Commoneer_Assets_Interface {
 				$file_path = $path.$file.'.'.$type;
 				if (file_exists(DOCROOT.$file_path)) {
 
-					$file_path = $this->_config->assets_url.$file_path;
 					// Remove configured base_url from the path (for the minify module)
 					if ($this->_config->min_base !== NULL) {
 						return ltrim($file_path, $this->_config->min_base);

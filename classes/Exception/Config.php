@@ -6,7 +6,7 @@
  * @package Commoneer
  * @subpackage Exception
  */
-class Exception_Config extends Commoneer_Exception {
+class Exception_Config extends Kohana_Exception {
 
 	/**
 	 * @var int Config error code

@@ -11,6 +11,7 @@
 * Overhaul Commoneer_Controller_Template API (and rename to Controller_Template)
 * Remove Controller_Ajax (should be replaced with a dedicated API module)
 * Add view action to Crud controller interface. Add Crud controller trait.
+* Refactored the Assets class. Removed always_include assets.
 
 2.0.1
 =====

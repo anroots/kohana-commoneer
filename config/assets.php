@@ -11,14 +11,6 @@
 return array(
 
 	/**
-	 * In case you have some crazy routing going on.
-	 * This will be appended between the base url and the asset path
-	 * Normally it's fine to leave it to NULL
-	 */
-	'assets_url'     => NULL,
-
-
-	/**
 	 * Base URL for the minify library (the &b= query param)
 	 *
 	 * @since 2.0
@@ -96,20 +88,5 @@ return array(
 			),
 		)
 	),
-
-	/**
-	 * A list of assets to always include. Order of assets is important.
-	 * These assets will always be rendered first
-	 *
-	 * @since 2.0
-	 */
-	'always_include' => array(
-		Assets::SCRIPT => array(
-
-		),
-		Assets::STYLE  => array(
-
-		)
-	)
 );
 
