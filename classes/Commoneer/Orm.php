@@ -7,13 +7,27 @@
  * @package Commoneer
  * @author Ando Roots <ando@sqroot.eu>
  */
-abstract class Commoneer_ORM extends Kohana_ORM {
+abstract class Commoneer_ORM extends Kohana_ORM
+{
 
-	protected $_created_column = array('column'=> 'created',
-	                                   'format'=> 'Y-m-d H:i:s'
+	/**
+	 * Auto-fill created column in DB tables on record create.
+	 *
+	 * @var array
+	 */
+	protected $_created_column = array(
+		'column' => 'created',
+		'format' => 'Y-m-d H:i:s'
 	);
-	protected $_updated_column = array('column'=> 'updated',
-	                                   'format'=> 'Y-m-d H:i:s'
+
+	/**
+	 * Auto-fill updated column in DB tables on record update
+	 *
+	 * @var array
+	 */
+	protected $_updated_column = array(
+		'column' => 'updated',
+		'format' => 'Y-m-d H:i:s'
 	);
 
 	/**
@@ -47,40 +61,29 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 	}
 
 	/**
-	 * Get a single or several ORM records, without deleted rows
+	 * Exclude deleted rows from the result set
 	 *
 	 * @since 1.1
-	 * @param mixed $id Empty: find all, integer: find a single row by ID
 	 * @return Database_Result
 	 */
-	public function get($id = NULL)
+	public function exclude_deleted()
 	{
-		if ($this->loaded()) {
-			$this->clear();
-		}
-
-		// We don't want deleted rows!
 		if ($this->_is_deletable && $this->_has_deleted) {
 			$this->where($this->_deleted_column_name, '=', 0);
 		}
 
-		// Get a single row by ID
-		if (is_numeric($id)) {
-			return $this->where($this->_primary_key, '=', $id)
-				->find();
-		}
-
-		return $this->find_all();
+		return $this;
 	}
 
 
 	/**
-	 * Safe delete of a record
+	 * Safe delete of a record.
 	 * Override the ORM::delete function since we usually
-	 * don't want to permanently destroy data
+	 * don't want to permanently destroy data.
 	 *
 	 * @since 1.1
 	 * @param bool $force Deletes the data permanently if set to TRUE
+	 * @throws ORM_Unloaded_Exception
 	 * @return bool|ORM
 	 */
 	public function delete($force = FALSE)
@@ -92,32 +95,11 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 
 		// Can not delete what isn't there...
 		if (! $this->loaded()) {
-			return FALSE;
+			throw new ORM_Unloaded_Exception;
 		}
 
 		$this->{$this->_deleted_column_name} = 1;
-		try {
-			return $this->save();
-		} catch (ORM_Validation_Exception $e) {
-			Validation::show_errors($e);
-		}
-		return FALSE;
-	}
-
-
-	/**
-	 * Find all matching rows
-	 * This override adds deleted checking
-	 *
-	 * @since 1.2
-	 * @return Database_Result
-	 */
-	public function find_all()
-	{
-		if ($this->_is_deletable && $this->_has_deleted) {
-			$this->where($this->_deleted_column_name, '=', 0);
-		}
-		return parent::find_all();
+		return $this->save();
 	}
 
 	/**
@@ -138,14 +120,14 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 	 * Used in logging functions.
 	 *
 	 * @since 2.0
-	 * @param bool $text TRUE to get back HTML string instead of an array
+	 * @param bool $html TRUE to get back HTML string instead of an array
 	 * @return array|string|null
 	 */
-	public function changed_log($text = TRUE)
+	public function changed_log($html = TRUE)
 	{
 		if ($this->loaded() && count($this->changed())) {
 
-			$log = [];
+			$log      = [];
 			$original = $this->original_values();
 
 			// Create a map of changed properties
@@ -154,7 +136,7 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 			}
 
 			// Return HTML?
-			if ($text) {
+			if ($html) {
 				$string = '<ul>';
 				foreach ($log as $key => $changes) {
 					$string .= '<li><strong>'.$key.'</strong>: '.$changes[0].' => '.$changes[1].'</li>';
@@ -166,5 +148,4 @@ abstract class Commoneer_ORM extends Kohana_ORM {
 		}
 		return NULL;
 	}
-
 }

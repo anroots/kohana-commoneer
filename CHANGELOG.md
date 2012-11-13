@@ -13,6 +13,7 @@
 * Add view action to Crud controller interface. Add Crud controller trait.
 * Refactored the Assets class. Removed always_include assets.
 * I18n public views
+* ORM::get changed to ORM::exclude_deleted
 
 2.0.1
 =====
