@@ -121,35 +121,4 @@ class Commoneer_Date extends Kohana_Date {
 
 		return date($include_time ? self::$_format_long : self::$_format_short, $date);
 	}
-
-
-
-
-	/**
-	 * Check if the input date is above the allowed limit
-	 * Used for checking for format errors where PHP usually uses the EPOCH
-	 *
-	 * @since 1.0
-	 * @static
-	 * @param string|int|DateTime $date Any valid date string
-	 * @param int $min Timestamp of the minimum accepted time, defaults to 1990-ish
-	 * @return bool TRUE If the input time is greater than the minimum
-	 */
-	public static function realistic_date($date, $min = NULL)
-	{
-		if ($date instanceof DateTime) {
-			$date = $date->getTimestamp();
-		}
-
-		if ($min === NULL) {
-			$min = 631152000; // 1990
-		}
-
-		if (! is_numeric($date)) {
-			$date = strtotime($date);
-		}
-
-		// If year is smaller than $min, it's probably invalid
-		return ! empty($date) && $date > $min;
-	}
 }

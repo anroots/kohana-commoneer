@@ -57,5 +57,4 @@ class Commoneer_Valid extends Kohana_Valid {
 
 		return $ts1 < $ts2;
 	}
-
 }
