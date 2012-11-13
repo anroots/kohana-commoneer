@@ -23,7 +23,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 *
 	 * @var bool
 	 */
-	protected $_require_login = false;
+	protected $_require_login = FALSE;
 
 	/**
 	 * Alias to $this->template->content
@@ -64,14 +64,13 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	public $id;
 
 	/**
-	 * Check login
+	 * Check if the user is logged in
 	 *
 	 * @since 1.2
 	 * @return void
 	 */
 	protected function _check_login()
 	{
-		// Redirect if not logged in
 		if ($this->_require_login && ! Auth::instance()->logged_in()) {
 			$this->redirect($this->_get_login_url());
 		}
@@ -84,6 +83,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 
 		$this->id = $this->request->param('id');
 
+		// Redirect if not logged in
 		$this->_check_login();
 
 		$this->_load_orm();
@@ -93,7 +93,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 
 		// Make the default ORM model accessible from the view
 		if ($this->_orm instanceof ORM && $this->content instanceof View) {
-			$this->content->{$this->_orm_name} = $this->_orm;
+			$this->content->{lcfirst($this->_orm_name)} = $this->_orm;
 		}
 	}
 
@@ -102,12 +102,12 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 */
 	private function _load_orm()
 	{
-		if ($this->_orm_name !== false) {
+		if ($this->_orm_name !== FALSE) {
 			$this->_orm_name = $this->_get_orm_name();
 		}
 
 		// Load associated ORM model
-		if ($this->_orm_name !== false) {
+		if ($this->_orm_name !== FALSE) {
 			$this->_orm = ORM::factory($this->_orm_name, $this->id);
 		}
 	}
@@ -121,12 +121,12 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	{
 		$dir = $this->request->directory();
 
-		$dir = empty($dir) ? null : $dir.DIRECTORY_SEPARATOR;
+		$dir       = empty($dir) ? NULL : $dir.DIRECTORY_SEPARATOR;
 		$view_path = $dir.$this->request->controller().DIRECTORY_SEPARATOR.$this->request->action();
 		$view_path = strtolower($view_path);
 
 		$this->content = Kohana::find_file('views', $view_path)
-			? View::factory($view_path) : null;
+			? View::factory($view_path) : NULL;
 	}
 
 	/**
@@ -136,11 +136,11 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 */
 	public function after()
 	{
-		if ($this->title !== false && empty($this->title)) {
+		if ($this->title !== FALSE && empty($this->title)) {
 			$this->title = Kohana::$config->load('app.title');
 		}
 
-		$this->template->title = $this->title;
+		$this->template->title   = $this->title;
 		$this->template->content = $this->content;
 		parent::after();
 	}
@@ -163,9 +163,11 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	private function _get_orm_name()
 	{
 		$controller_name = explode('Controller_', get_called_class(), 2)[1];
+		$controller_name = ucfirst(Inflector::singular($controller_name));
+
 		if (class_exists('Model_'.$controller_name)) {
 			return $controller_name;
 		}
-		return false;
+		return FALSE;
 	}
 }
