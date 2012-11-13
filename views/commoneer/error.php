@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title><?=__("Oops!")?></title>
+	<title><?=__("commoneer.error.title")?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.1.0/united/bootstrap.min.css"/>
@@ -33,11 +33,11 @@
 <div class="container">
 	<form class="error-container">
 		<h2>
-			<?=__('Error :code', array(':code' => $code))?>
+			<?=__('commoneer.error.heading', array(':code' => $code))?>
 		</h2>
 
 		<p class="alert alert-block alert-error">
-			<?=__('Sorry, but there was an error while processing your request.')?>
+			<?=__('commoneer.error.intro')?>
 		</p>
 
 		<? if (! empty($message)): ?>
@@ -45,7 +45,7 @@
 		<? endif ?>
 
 		<p>
-			<a href="<?=URL::base()?>"><?=__('Go to the home page')?></a>
+			<a href="<?=URL::base()?>"><?=__('commoneer.error.home')?></a>
 		</p>
 	</form>
 </div>

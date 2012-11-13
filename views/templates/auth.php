@@ -13,7 +13,7 @@
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<style type="text/css">
 		html {
 			background-color: #e8e8e8
@@ -28,18 +28,21 @@
 		}
 
 		#container {
-			background-color: trancparent;
+			background-color: transparent;
 			width: 30%;
 			min-width: 300px;
 			margin: 4% auto auto auto
+		}
+		header,
+		#main {
+			padding: 20px 20px 2px 20px;
+			width: 80%;
+			margin: auto;
 		}
 
 		#main {
 			background: white;
 			min-height: 36%;
-			padding: 20px 20px 2px 20px;
-			width: 80%;
-			margin: auto;
 			overflow: hidden;
 			border-radius: 6px;
 			-moz-border-radius: 6px;
@@ -47,22 +50,6 @@
 			-webkit-box-shadow: 0 0 10px 1px #bcbcbc;
 			-moz-box-shadow: 0 0 10px 1px #bcbcbc;
 			box-shadow: 0 0 10px 1px #bcbcbc
-		}
-
-		#main p {
-			color: #32373c
-		}
-
-		#main form {
-			margin-top: 1em
-		}
-
-		#main .btn {
-			text-align: center;
-			width: 136%;
-			position: relative;
-			left: -22%;
-			margin-top: 1em
 		}
 
 		footer {
@@ -75,44 +62,49 @@
 	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
-
 </head>
 <body>
 
 <div id="container">
 	<header>
 		<h1><?=Kohana::$config->load('app.title')?></h1>
-
-		<div class="clearfix"></div>
 	</header>
-
 
 	<div id="main" role="main">
 		<?=Notify::render()?>
 
-		<p><?=__('Please login to access the protected pages.')?></p>
+		<p><?=__('commoneer.auth.intro')?></p>
 
 		<form action="" method="post" id="login-form" class="form-stacked">
-			<label for="user"><?=__('Username')?>:</label>
-			<input type="text" id="user" placeholder="..." maxlength="32" name="user" autofocus required/>
+			<div class="control-group">
+				<label for="user"><?=__('commoneer.auth.username')?>:</label>
 
-			<div class="clearfix"></div>
+				<div class="controls">
+					<input type="text" id="user" placeholder="<?=__("form.general.placeholder")?>"
+						   maxlength="255" name="user" class="input-xlarge" autofocus required/>
+				</div>
+			</div>
 
-			<label for="pass"><?=__('Password')?>:</label>
-			<input type="password" placeholder="secret" maxlength="32" name="pass" id="pass" required/>
+			<div class="control-group">
+				<label for="pass"><?=__('commoneer.auth.password')?>:</label>
 
-			<div class="clearfix"></div>
-
-			<input type="submit" class="btn btn-large btn-primary" name="login" value="<?=__('Login')?>"/>
-
-			<div class="clearfix"></div>
-
+				<div class="controls">
+					<input type="password" placeholder="<?=__("form.general.placeholder")?>" maxlength="255"
+						   name="pass" id="pass" class="input-xlarge" required/>
+				</div>
+			</div>
+			<input type="submit" class="btn btn-large btn-block btn-primary" name="login" value="<?=__('Login')?>"/>
 		</form>
-
 	</div>
 
 	<footer>
-		<?=Kohana::$config->load('app.codename')?> versioon <?=Kohana::$config->load('app.version')?>
+		<?=__(
+		"commoneer.auth.version",
+		[
+			':codename' => Kohana::$config->load('app.codename'),
+			':version'  => Kohana::$config->load('app.version')
+		]
+	)?>
 	</footer>
 </div>
 </body>
