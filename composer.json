@@ -1,0 +1,21 @@
+{
+	"name": "anroots/commoneer",
+	"type": "kohana-module",
+	"description": "Extension of the Kohana Framework, adding commonly used features for faster development.",
+	"keywords": ["kohana","commoneer","kohana module"],
+	"homepage": "https://github.com/anroots/kohana-commoneer",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Ando Roots",
+			"email": "ando@sqroot.eu",
+			"homepage": "http://sqroot.eu",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"composer/installers": "*",
+		"anroots/notify":"2.*"
+	}
+}
