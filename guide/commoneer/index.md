@@ -1,6 +1,8 @@
 Commoneer Version 2.0
 =====================
 
+N.B! The guide is not up to date.
+
 Commoneer provides commonly used helpers, methods and classes that the author saw fit to add to Kohana.
 The module extends several Kohana's built-in classes, providing additional functions and behaviour.
 

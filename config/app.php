@@ -9,23 +9,20 @@
 return array(
 
 	/**
-	 * The title of the application. Think HTML <title>
+	 * The (default) title of the application for HTML <title>
 	 */
-	'title' => 'Your application title',
+	'title'    => 'MyApp',
 
 	/**
-	 * The description of the application. Think HTML <meta>
-	 */
-	'description' => 'Your application description.',
-
-	/**
-	 * The codename of the application
+	 * The codename of the application (for developers)
 	 */
 	'codename' => 'Project X',
 
 	/**
-	 * Current app version
+	 * Current app version.
+	 *
+	 * @link http://semver.org/
 	 */
-	'version' => '1.0.0',
+	'version'  => '0.1.0-dev',
 
 );

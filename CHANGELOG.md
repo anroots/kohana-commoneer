@@ -12,6 +12,7 @@
 * Remove Controller_Ajax (should be replaced with a dedicated API module)
 * Add view action to Crud controller interface. Add Crud controller trait.
 * Refactored the Assets class. Removed always_include assets.
+* I18n public views
 
 2.0.1
 =====
