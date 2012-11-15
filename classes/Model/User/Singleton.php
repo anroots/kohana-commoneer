@@ -3,7 +3,7 @@
  * @since 3.0
  * @author Ando Roots <ando@sqroot.eu>
  */
-trait Commoneer_Model_User_Singleton {
+trait Model_User_Singleton {
 
 	/**
 	 * Get the singleton instance of the logged in user
