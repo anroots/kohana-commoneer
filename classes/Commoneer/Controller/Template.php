@@ -102,7 +102,7 @@ abstract class Commoneer_Controller_Template extends Kohana_Controller_Template
 	 */
 	private function _load_orm()
 	{
-		if ($this->_orm_name !== FALSE) {
+		if ($this->_orm_name === NULL) {
 			$this->_orm_name = $this->_get_orm_name();
 		}
 
